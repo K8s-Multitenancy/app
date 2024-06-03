@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: namespace-admin
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: namespace-x
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: namespace-y

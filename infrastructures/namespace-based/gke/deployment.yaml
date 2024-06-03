@@ -1,0 +1,445 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skripsi-auth-deployment
+  namespace: namespace-admin
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: skripsi-auth
+  template:
+    metadata:
+      labels:
+        app: skripsi-auth
+    spec:
+      containers:
+      - name: skripsi-auth
+        image: vincentsuryakimui/skripsi-auth:040524
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        env:
+        - name: TENANT_ID
+          value: "00000000-0000-0000-0000-000000000000"
+        - name: JWT_SECRET
+          value: "admin_auth_ms_jwt_secret"
+        - name: ADMIN_JWT_SECRET
+          value: "admin_auth_ms_jwt_secret"
+        - name: ADMIN_TENANT_ID
+          value: "00000000-0000-0000-0000-000000000000"
+        - name: DB_HOST
+          value: "34.143.248.19"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skripsi-tenant-deployment
+  namespace: namespace-admin
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: skripsi-tenant
+  template:
+    metadata:
+      labels:
+        app: skripsi-tenant
+    spec:
+      containers:
+      - name: skripsi-tenant
+        image: vincentsuryakimui/skripsi-tenant:040524
+        ports:
+        - containerPort: 8003
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        env:
+        - name: AUTH_MS_URL
+          value: "http://skripsi-auth-service:8000"
+        - name: DB_HOST
+          value: "34.87.111.220"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skripsi-auth-deployment
+  namespace: namespace-x
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: skripsi-auth
+  template:
+    metadata:
+      labels:
+        app: skripsi-auth
+    spec:
+      containers:
+      - name: skripsi-auth
+        image: vincentsuryakimui/skripsi-auth:040524
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        env:
+        - name: TENANT_ID
+          value: "68a2ef7b-8857-496d-9cf0-84c62bdfef3e"
+        - name: JWT_SECRET
+          value: "auth_ms_jwt_secret"
+        - name: ADMIN_JWT_SECRET
+          value: "admin_auth_ms_jwt_secret"
+        - name: ADMIN_TENANT_ID
+          value: "00000000-0000-0000-0000-000000000000"
+        - name: DB_HOST
+          value: "34.143.248.19"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skripsi-tenant-deployment
+  namespace: namespace-x
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: skripsi-tenant
+  template:
+    metadata:
+      labels:
+        app: skripsi-tenant
+    spec:
+      containers:
+      - name: skripsi-tenant
+        image: vincentsuryakimui/skripsi-tenant:040524
+        ports:
+        - containerPort: 8003
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        env:
+        - name: AUTH_MS_URL
+          value: "http://skripsi-auth-service:8000"
+        - name: DB_HOST
+          value: "34.87.111.220"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skripsi-products-deployment
+  namespace: namespace-x
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: skripsi-products
+  template:
+    metadata:
+      labels:
+        app: skripsi-products
+    spec:
+      containers:
+      - name: skripsi-products
+        image: vincentsuryakimui/skripsi-products:040524
+        ports:
+        - containerPort: 8002
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        env:
+        - name: TENANT_ID
+          value: "68a2ef7b-8857-496d-9cf0-84c62bdfef3e"
+        - name: DB_HOST
+          value: "34.87.107.154"
+        - name: AUTH_MS_URL
+          value: "http://skripsi-auth-service.namespace-admin.svc.cluster.local:8000"
+        - name: TENANT_MS_URL
+          value: "http://skripsi-tenant-service.namespace-admin.svc.cluster.local:8003"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skripsi-wishlist-deployment
+  namespace: namespace-x
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: skripsi-wishlist
+  template:
+    metadata:
+      labels:
+        app: skripsi-wishlist
+    spec:
+      containers:
+      - name: skripsi-wishlist
+        image: vincentsuryakimui/skripsi-wishlist:040524
+        ports:
+        - containerPort: 8004
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        env:
+        - name: TENANT_ID
+          value: "68a2ef7b-8857-496d-9cf0-84c62bdfef3e"
+        - name: DB_HOST
+          value: "34.143.197.14"
+        - name: AUTH_MS_URL
+          value: "http://skripsi-auth-service:8000"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skripsi-orders-deployment
+  namespace: namespace-x
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: skripsi-orders
+  template:
+    metadata:
+      labels:
+        app: skripsi-orders
+    spec:
+      containers:
+      - name: skripsi-orders
+        image: vincentsuryakimui/skripsi-orders:040524
+        ports:
+        - containerPort: 8001
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        env:
+        - name: TENANT_ID
+          value: "68a2ef7b-8857-496d-9cf0-84c62bdfef3e"
+        - name: DB_HOST
+          value: "34.142.242.51"
+        - name: AUTH_MS_URL
+          value: "http://skripsi-auth-service:8000"
+        - name: PRODUCT_MS_URL
+          value: "http://skripsi-products-service:8002"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skripsi-auth-deployment
+  namespace: namespace-y
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: skripsi-auth
+  template:
+    metadata:
+      labels:
+        app: skripsi-auth
+    spec:
+      containers:
+      - name: skripsi-auth
+        image: vincentsuryakimui/skripsi-auth:040524
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        env:
+        - name: TENANT_ID
+          value: "97881954-e7ce-4fe5-b1f1-cc26aee8d71c"
+        - name: JWT_SECRET
+          value: "auth_ms_jwt_secret"
+        - name: ADMIN_JWT_SECRET
+          value: "admin_auth_ms_jwt_secret"
+        - name: ADMIN_TENANT_ID
+          value: "00000000-0000-0000-0000-000000000000"
+        - name: DB_HOST
+          value: "34.143.248.19"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skripsi-tenant-deployment
+  namespace: namespace-y
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: skripsi-tenant
+  template:
+    metadata:
+      labels:
+        app: skripsi-tenant
+    spec:
+      containers:
+      - name: skripsi-tenant
+        image: vincentsuryakimui/skripsi-tenant:040524
+        ports:
+        - containerPort: 8003
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        env:
+        - name: AUTH_MS_URL
+          value: "http://skripsi-auth-service:8000"
+        - name: DB_HOST
+          value: "34.87.111.220"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skripsi-products-deployment
+  namespace: namespace-y
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: skripsi-products
+  template:
+    metadata:
+      labels:
+        app: skripsi-products
+    spec:
+      containers:
+      - name: skripsi-products
+        image: vincentsuryakimui/skripsi-products:040524
+        ports:
+        - containerPort: 8002
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        env:
+        - name: TENANT_ID
+          value: "97881954-e7ce-4fe5-b1f1-cc26aee8d71c"
+        - name: DB_HOST
+          value: "34.87.107.154"
+        - name: AUTH_MS_URL
+          value: "http://skripsi-auth-service:8000"
+        - name: TENANT_MS_URL
+          value: "http://skripsi-tenant-service:8003"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skripsi-wishlist-deployment
+  namespace: namespace-y
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: skripsi-wishlist
+  template:
+    metadata:
+      labels:
+        app: skripsi-wishlist
+    spec:
+      containers:
+      - name: skripsi-wishlist
+        image: vincentsuryakimui/skripsi-wishlist:040524
+        ports:
+        - containerPort: 8004
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        env:
+        - name: TENANT_ID
+          value: "97881954-e7ce-4fe5-b1f1-cc26aee8d71c"
+        - name: DB_HOST
+          value: "34.143.197.14"
+        - name: AUTH_MS_URL
+          value: "http://skripsi-auth-service:8000"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skripsi-orders-deployment
+  namespace: namespace-y
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: skripsi-orders
+  template:
+    metadata:
+      labels:
+        app: skripsi-orders
+    spec:
+      containers:
+      - name: skripsi-orders
+        image: vincentsuryakimui/skripsi-orders:040524
+        ports:
+        - containerPort: 8001
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        env:
+        - name: TENANT_ID
+          value: "97881954-e7ce-4fe5-b1f1-cc26aee8d71c"
+        - name: DB_HOST
+          value: "34.142.242.51"
+        - name: AUTH_MS_URL
+          value: "http://skripsi-auth-service:8000"
+        - name: PRODUCT_MS_URL
+          value: "http://skripsi-products-service:8002"
