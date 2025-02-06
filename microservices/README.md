@@ -20,7 +20,7 @@ docker ps
 Look for the container name of your microservice application (e.g., `wishlist-microservice-1`).
 
 ### 3️⃣ Access the Microservice Container
-Replace `<CONTAINER-NAME>` with your actual microservice container name and run:
+Replace `<CONTAINER-NAME>` with your actual microservice container name (the one with "microservice" keyword) and run:
 
 ```sh
 docker exec -it <CONTAINER-NAME> sh
@@ -35,7 +35,7 @@ npm run push
 ```
 
 ### 5️⃣ Verify the Database
-To check if the tables have been created, connect to the database container:
+To check if the tables have been created, connect to the database container (the one with "db" keyword):
 
 ```sh
 docker exec -it <CONTAINER-NAME> psql -U postgres
