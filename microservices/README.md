@@ -23,7 +23,7 @@ Look for the container name of your microservice application (e.g., `wishlist-mi
 Replace `<CONTAINER-NAME>` with your actual microservice container name and run:
 
 ```sh
-docker exec -it <CONTAINER-NAME>-microservice-1 sh
+docker exec -it <CONTAINER-NAME> sh
 ```
 
 ### 4️⃣ Generate and Apply Database Migrations
@@ -38,7 +38,7 @@ npm run push
 To check if the tables have been created, connect to the database container:
 
 ```sh
-docker exec -it <CONTAINER-NAME>-db-1 psql -U postgres
+docker exec -it <CONTAINER-NAME> psql -U postgres
 ```
 
 Then, run:
