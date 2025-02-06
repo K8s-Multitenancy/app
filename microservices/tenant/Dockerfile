@@ -16,6 +16,9 @@ RUN pnpm install
 # Copying the rest of the application
 COPY . .
 
+# ✅ Ensure `drizzle.config.ts` is copied
+RUN ls -la drizzle.config.ts
+
 # Building our application
 RUN pnpm run build
 
@@ -32,6 +35,8 @@ WORKDIR /skripsi-tenant
 # Copy built files from the previous stage
 COPY --from=builder /skripsi-tenant/dist ./dist
 COPY --from=builder /skripsi-tenant/package.json ./package.json
+COPY --from=builder /skripsi-tenant/drizzle.config.ts ./drizzle.config.ts 
+COPY --from=builder /skripsi-tenant/db/schema ./db/schema
 
 # Install production dependencies only
 RUN npm install --only=production
@@ -40,4 +45,4 @@ RUN npm install --only=production
 EXPOSE 8003
 
 # Start the application
-CMD ["node", "dist/src/server.js"]
+CMD ["node", "dist/src/server.js", "npm run generate", "npm run push"]

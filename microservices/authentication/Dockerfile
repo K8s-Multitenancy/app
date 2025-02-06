@@ -4,7 +4,7 @@ FROM node:18.18.2 AS builder
 # Setting up the work directory
 WORKDIR /skripsi-auth
 
-# Copying package.json separately
+# Copy package.json separately
 COPY package.json ./
 
 # Install pnpm
@@ -13,8 +13,11 @@ RUN npm install -g pnpm typescript
 # Installing dependencies
 RUN pnpm install
 
-# Copying the rest of the application
+# Copying the rest of the application (including `drizzle.config.ts`)
 COPY . .
+
+# ✅ Ensure `drizzle.config.ts` is copied
+RUN ls -la drizzle.config.ts
 
 # Building our application
 RUN pnpm run build
@@ -32,6 +35,8 @@ WORKDIR /skripsi-auth
 # Copy built files from the previous stage
 COPY --from=builder /skripsi-auth/dist ./dist
 COPY --from=builder /skripsi-auth/package.json ./package.json
+COPY --from=builder /skripsi-auth/drizzle.config.ts ./drizzle.config.ts 
+COPY --from=builder /skripsi-auth/db/schema ./db/schema
 
 # Install production dependencies only
 RUN npm install --only=production
@@ -39,5 +44,6 @@ RUN npm install --only=production
 # Expose server port
 EXPOSE 8000
 
-# Start the application
-CMD ["node", "dist/src/server.js"]
+# ✅ Run Drizzle Migrations at startup
+# CMD ["sh", "-c"]
+CMD ["node", "dist/src/server.js", "npm run generate", "npm run push"]
