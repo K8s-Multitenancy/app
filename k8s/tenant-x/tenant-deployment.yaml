@@ -21,7 +21,7 @@ spec:
             - containerPort: 8000
           env:
             - name: TENANT_ID
-              value: "47dd6b24-0b23-46b0-a662-776158d089ba"
+              value: "1e4f3b2a-8d7c-4a9b-bcde-1234567890ab"
             - name: JWT_SECRET
               value: "auth_ms_jwt_secret"
             - name: DB_HOST

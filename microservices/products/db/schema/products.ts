@@ -2,7 +2,7 @@ import { foreignKey, integer, pgTable, uuid, varchar } from "drizzle-orm/pg-core
 import { categories } from "./categories";
 
 export const products = pgTable("products", {
-  id: uuid('id').defaultRandom().primaryKey(),
+  id: uuid('id').defaultRandom().primaryKey().notNull(),
   tenant_id: uuid('tenant_id').notNull(),
   name: varchar('name').notNull(),
   description: varchar('description'),
