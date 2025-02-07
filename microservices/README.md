@@ -1,6 +1,7 @@
-## How to Run and Migrate the Database Table
+# How to Run and Migrate the Database Table
 
 Follow these steps to set up and migrate the database:
+### You need to run these commands in every microservice apps in this directory
 
 ### 1️⃣ Start the Docker Containers
 Run the following command to build and start your microservices:
@@ -19,10 +20,10 @@ docker ps
 Look for the container name of your microservice application (e.g., `wishlist-microservice-1`).
 
 ### 3️⃣ Access the Microservice Container
-Replace `<CONTAINER-NAME>` with your actual microservice container name and run:
+Replace `<CONTAINER-NAME>` with your actual microservice container name (the one with "microservice" keyword) and run:
 
 ```sh
-docker exec -it <CONTAINER-NAME>-microservice-1 sh
+docker exec -it <CONTAINER-NAME> sh
 ```
 
 ### 4️⃣ Generate and Apply Database Migrations
@@ -34,10 +35,10 @@ npm run push
 ```
 
 ### 5️⃣ Verify the Database
-To check if the tables have been created, connect to the database container:
+To check if the tables have been created, connect to the database container (the one with "db" keyword):
 
 ```sh
-docker exec -it <CONTAINER-NAME>-db-1 psql -U postgres
+docker exec -it <CONTAINER-NAME> psql -U postgres
 ```
 
 Then, run:
