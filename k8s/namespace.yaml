@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: root-namespace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: namespace-admin
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: namespace-tenant-x
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: namespace-tenant-y
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: db-admin
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: db-x
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: db-y
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app-admin
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app-x
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app-y
+---
+
+---
+# Run the command below in terminal to set the parent namespaces
+# kubectl hns set namespace-admin --parent=root-namespace
+# kubectl hns set namespace-tenant-x --parent=root-namespace
+# kubectl hns set namespace-tenant-y --parent=root-namespace
+# kubectl hns set db-admin --parent=namespace-admin
+# kubectl hns set db-x --parent=namespace-tenant-x
+# kubectl hns set db-y --parent=namespace-tenant-y
+# kubectl hns set app-admin --parent=namespace-admin
+# kubectl hns set app-x --parent=namespace-tenant-x
+# kubectl hns set app-y --parent=namespace-tenant-y
