@@ -189,3 +189,17 @@ Ensure these commands **execute successfully** before proceeding.
 If the expected tables **exist**, then the application is **successfully deployed** and **ready to use**. 🎉
 
 If tables are **missing**, there might be an error—**good luck debugging!** 🛠️🚀
+
+---
+
+## ⚙️ Step 7: Create Minikube Service
+1. Run these commands for every services created
+```sh
+minikube service <SERVICE_NAME> -n <NAMESPACE>
+
+# For example:
+minikube service authentication-microservice -n app-admin
+```
+You can check services names using `kubectl get svc -n <NAMESPACE>`
+
+2. Minikube will open their service and provide the URL to be used in the API
