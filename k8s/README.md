@@ -20,8 +20,7 @@
     ```
 
 4. Rename `kubectl-hns_windows_amd64.exe` to `kubectl-hns.exe`
-5. Move `kubectl-hns.exe` to the folder of your choosing.
-   (Suggestion: `C:\Users\YourUserName\.kubectl-hns\kubectl-hns.exe`)
+5. Move `kubectl-hns.exe` to this folder `C:\Users\YourUserName\.kubectl-hns\kubectl-hns.exe`
 6. Add this Environment Variables to your PATH (Edit System Environment Variables)
 
     ```sh
