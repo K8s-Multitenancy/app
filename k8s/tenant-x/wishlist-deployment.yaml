@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wishlist-microservice
+  namespace: app-x
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wishlist-microservice
+  template:
+    metadata:
+      labels:
+        app: wishlist-microservice
+    spec:
+      containers:
+      - name: wishlist-microservice
+        image: wishlist-microservice:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+        env:
+        - name: TENANT_ID
+          value: "47dd6b24-0b23-46b0-a662-776158d089ba"
+        - name: JWT_SECRET
+          value: "auth_ms_jwt_secret"
+        - name: DB_HOST
+          value: "wishlist-db.db-x.svc.cluster.local"
+        - name: DB_USER
+          value: "postgres"
+        - name: DB_PASSWORD
+          value: "postgres"
+        - name: DB_PORT
+          value: "5432"
+        - name: DATABASE_URL
+          value: "postgres://postgres:postgres@wishlist-db:5432/wishlist"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wishlist-microservice
+  namespace: app-x
+spec:
+  selector:
+    app: wishlist-microservice
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: ClusterIP

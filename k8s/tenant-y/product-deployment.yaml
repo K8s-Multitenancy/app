@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-microservice
+  namespace: app-y
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-microservice
+  template:
+    metadata:
+      labels:
+        app: product-microservice
+    spec:
+      containers:
+        - name: product-microservice
+          image: product-microservice:latest
+          imagePullPolicy: Never  # Uses locally built image in Minikube
+          ports:
+            - containerPort: 8000
+          env:
+            - name: product_ID
+              value: "47dd6b24-0b23-46b0-a662-776158d089ba"
+            - name: JWT_SECRET
+              value: "auth_ms_jwt_secret"
+            - name: DB_HOST
+              value: "product-db.db-y.svc.cluster.local" # IN THE DIFFERENT NAMESPACE< SPECIFY THE NAMESPACE
+            - name: DB_PORT
+              value: "5432"
+            - name: DATABASE_URL
+              value: "postgres://postgres:postgres@product-db:5432/product"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-microservice
+  namespace: app-y
+spec:
+  selector:
+    app: product-microservice
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: NodePort

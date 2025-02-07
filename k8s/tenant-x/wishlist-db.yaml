@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wishlist-db-pvc
+  namespace: db-x
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wishlist-db
+  namespace: db-x
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wishlist-db
+  template:
+    metadata:
+      labels:
+        app: wishlist-db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:14-alpine
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: "wishlist"
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          value: "postgres"
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: db-storage
+      volumes:
+      - name: db-storage
+        persistentVolumeClaim:
+          claimName: wishlist-db-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wishlist-db
+  namespace: db-x
+spec:
+  selector:
+    app: wishlist-db
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP
