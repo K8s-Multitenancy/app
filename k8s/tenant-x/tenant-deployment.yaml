@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tenant-microservice
+  namespace: app-x
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tenant-microservice
+  template:
+    metadata:
+      labels:
+        app: tenant-microservice
+    spec:
+      containers:
+        - name: tenant-microservice
+          image: tenant-microservice:latest
+          imagePullPolicy: Never  # Uses locally built image in Minikube
+          ports:
+            - containerPort: 8000
+          env:
+            - name: TENANT_ID
+              value: "47dd6b24-0b23-46b0-a662-776158d089ba"
+            - name: JWT_SECRET
+              value: "auth_ms_jwt_secret"
+            - name: DB_HOST
+              value: "tenant-db.db-x.svc.cluster.local" # IN THE DIFFERENT NAMESPACE< SPECIFY THE NAMESPACE
+            - name: DB_PORT
+              value: "5432"
+            - name: DATABASE_URL
+              value: "postgres://postgres:postgres@tenant-db:5432/tenant"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tenant-microservice
+  namespace: app-x
+spec:
+  selector:
+    app: tenant-microservice
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: NodePort

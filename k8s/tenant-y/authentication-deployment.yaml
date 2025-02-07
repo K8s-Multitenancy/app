@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentication-microservice
+  namespace: app-y
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentication-microservice
+  template:
+    metadata:
+      labels:
+        app: authentication-microservice
+    spec:
+      containers:
+        - name: authentication-microservice
+          image: authentication-microservice:latest
+          imagePullPolicy: Never  # Uses locally built image in Minikube
+          ports:
+            - containerPort: 8000
+          env:
+            - name: TENANT_ID
+              value: "47dd6b24-0b23-46b0-a662-776158d089ba"
+            - name: JWT_SECRET
+              value: "auth_ms_jwt_secret"
+            - name: DB_HOST
+              value: "authentication-db.db-y.svc.cluster.local" # IN THE DIFFERENT NAMESPACE< SPECIFY THE NAMESPACE
+            - name: DB_PORT
+              value: "5432"
+            - name: DATABASE_URL
+              value: "postgres://postgres:postgres@authentication-db:5432/authentication"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authentication-microservice
+  namespace: app-y
+spec:
+  selector:
+    app: authentication-microservice
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: NodePort
