@@ -21,7 +21,7 @@ spec:
             - containerPort: 8000
           env:
             - name: product_ID
-              value: "47dd6b24-0b23-46b0-a662-776158d089ba"
+              value:  "a7c8d9e0-1b2f-4d3c-8e7a-6b5c4d3f2a1e"
             - name: JWT_SECRET
               value: "auth_ms_jwt_secret"
             - name: DB_HOST
