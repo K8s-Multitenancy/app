@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: order-microservice
-  namespace: app-y
+  namespace: namespace-tenant-y
 spec:
   replicas: 1
   selector:
@@ -25,7 +25,7 @@ spec:
         - name: JWT_SECRET
           value: "auth_ms_jwt_secret"
         - name: DB_HOST
-          value: "order-db.db-y.svc.cluster.local"
+          value: "order-db.db.svc.cluster.local"
         - name: DB_USER
           value: "postgres"
         - name: DB_PASSWORD
@@ -40,7 +40,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: order-microservice
-  namespace: app-y
+  namespace: namespace-tenant-y
 spec:
   selector:
     app: order-microservice
