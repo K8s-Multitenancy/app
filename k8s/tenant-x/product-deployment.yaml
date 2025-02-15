@@ -16,7 +16,7 @@ spec:
       containers:
         - name: product-microservice
           image: vinsensiusf/skripsi-products-microservice:latest
-          imagePullPolicy: Never  # Uses locally built image in Minikube
+          imagePullPolicy: Always  # Uses locally built image in Minikube
           ports:
             - containerPort: 8002
           env:

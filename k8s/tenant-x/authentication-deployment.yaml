@@ -16,7 +16,7 @@ spec:
       containers:
         - name: authentication-microservice
           image: vinsensiusf/skripsi-authentication-microservice:latest
-          imagePullPolicy: Never  # Uses locally built image in Minikube
+          imagePullPolicy: Always  # Uses locally built image in Minikube
           ports:
             - containerPort: 8000
           env:
