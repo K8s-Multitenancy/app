@@ -25,11 +25,11 @@ spec:
         - name: JWT_SECRET
           value: "auth_ms_jwt_secret"
         - name: AUTH_MS_URL
-          value: "http://authentication-microservice.app-x.svc.cluster.local:8000"
+          value: "http://authentication-microservice.app-x.svc.cluster.local:8000" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
         - name: PRODUCT_MS_URL
-          value: "http://product-microservice.app-x.svc.cluster.local:8002"
+          value: "http://product-microservice.app-x.svc.cluster.local:8002" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
         - name: DB_HOST
-          value: "order-db.db-x.svc.cluster.local"
+          value: "order-db.db-x.svc.cluster.local" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
         - name: DB_USER
           value: "postgres"
         - name: DB_PASSWORD
@@ -37,7 +37,7 @@ spec:
         - name: DB_PORT
           value: "5432"
         - name: DATABASE_URL
-          value: "postgres://postgres:postgres@order-db:5432/order"
+          value: "postgres://postgres:postgres@order-db:5432/order" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
 
 ---
 apiVersion: v1

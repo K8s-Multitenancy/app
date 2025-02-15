@@ -33,7 +33,7 @@ spec:
             - name: DB_PORT
               value: "5432"
             - name: DATABASE_URL
-              value: "postgres://postgres:postgres@authentication-db:5432/authentication"
+              value: "postgres://postgres:postgres@authentication-db:5432/authentication" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
 
 ---
 apiVersion: v1

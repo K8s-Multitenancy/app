@@ -27,13 +27,13 @@ spec:
             - name: JWT_SECRET
               value: "auth_ms_jwt_secret"
             - name: AUTH_MS_URL
-              value: "http://authentication-microservice.app-admin.svc.cluster.local:8000"
+              value: "http://authentication-microservice.app-admin.svc.cluster.local:8000" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
             - name: DB_HOST
-              value: "tenant-db.db-admin.svc.cluster.local" # IN THE DIFFERENT NAMESPACE< SPECIFY THE NAMESPACE
+              value: "tenant-db.db-admin.svc.cluster.local" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
             - name: DB_PORT
               value: "5432"
             - name: DATABASE_URL
-              value: "postgres://postgres:postgres@tenant-db:5432/tenant"
+              value: "postgres://postgres:postgres@tenant-db:5432/tenant" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
 
 ---
 apiVersion: v1
