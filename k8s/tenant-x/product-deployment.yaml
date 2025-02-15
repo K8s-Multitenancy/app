@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: product-microservice
-  namespace: namespace-tenant-x
+  namespace: app-x
 spec:
   replicas: 1
   selector:
@@ -15,33 +15,42 @@ spec:
     spec:
       containers:
         - name: product-microservice
-          image: product-microservice:latest
-          imagePullPolicy: Never  # Uses locally built image in Minikube
+          image: vinsensiusf/skripsi-products-microservice:latest
+          imagePullPolicy: Always  # Uses locally built image in Minikube
           ports:
-            - containerPort: 8000
+            - containerPort: 8002
           env:
             - name: product_ID
               value:  "1e4f3b2a-8d7c-4a9b-bcde-1234567890ab"
+            - name: TENANT_ID
+              value: "1e4f3b2a-8d7c-4a9b-bcde-1234567890ab"
+            - name: ADMIN_TENANT_ID
+              value: "1e4f3b2a-8d7c-4a9b-bcde-1234567890ab"
             - name: JWT_SECRET
               value: "auth_ms_jwt_secret"
+            - name: AUTH_MS_URL
+              value: "http://authentication-microservice.app-x.svc.cluster.local:8000" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
+            - name: TENANT_MS_URL
+              value: "http://tenant-microservice.app-x.svc.cluster.local:8003" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
             - name: DB_HOST
-              value: "product-db.db.svc.cluster.local" # IN THE DIFFERENT NAMESPACE< SPECIFY THE NAMESPACE
+              value: "product-db.db-x.svc.cluster.local"#NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
             - name: DB_PORT
               value: "5432"
             - name: DATABASE_URL
-              value: "postgres://postgres:postgres@product-db:5432/product"
+              value: "postgres://postgres:postgres@product-db:5432/product" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: product-microservice
-  namespace: namespace-tenant-x
+  namespace: app-x
 spec:
   selector:
     app: product-microservice
   ports:
     - protocol: TCP
-      port: 8000
-      targetPort: 8000
+      port: 8002
+      targetPort: 8002
+      nodePort: 30004
   type: NodePort

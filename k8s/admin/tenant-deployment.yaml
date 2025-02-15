@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tenant-microservice
-  namespace: namespace-admin
+  namespace: app-admin
 spec:
   replicas: 1
   selector:
@@ -15,33 +15,38 @@ spec:
     spec:
       containers:
         - name: tenant-microservice
-          image: tenant-microservice:latest
-          imagePullPolicy: Never  # Uses locally built image in Minikube
+          image: vinsensiusf/skripsi-tenant-microservice:latest
+          imagePullPolicy: Always
           ports:
-            - containerPort: 8000
+            - containerPort: 8003
           env:
             - name: TENANT_ID
               value: "47dd6b24-0b23-46b0-a662-776158d089ba"
+            - name: ADMIN_TENANT_ID
+              value: "47dd6b24-0b23-46b0-a662-776158d089ba"
             - name: JWT_SECRET
               value: "auth_ms_jwt_secret"
+            - name: AUTH_MS_URL
+              value: "http://authentication-microservice.app-admin.svc.cluster.local:8000" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
             - name: DB_HOST
-              value: "tenant-db.db.svc.cluster.local" # IN THE DIFFERENT NAMESPACE< SPECIFY THE NAMESPACE
+              value: "tenant-db.db-admin.svc.cluster.local" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
             - name: DB_PORT
               value: "5432"
             - name: DATABASE_URL
-              value: "postgres://postgres:postgres@tenant-db:5432/tenant"
+              value: "postgres://postgres:postgres@tenant-db:5432/tenant" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: tenant-microservice
-  namespace:  namespace-admin
+  namespace:  app-admin
 spec:
   selector:
     app: tenant-microservice
+  type: NodePort
   ports:
     - protocol: TCP
       port: 8003
       targetPort: 8003
-  type: NodePort
+      nodePort: 30001
