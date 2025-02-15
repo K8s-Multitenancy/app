@@ -18,14 +18,14 @@ spec:
           image: product-microservice:latest
           imagePullPolicy: Never  # Uses locally built image in Minikube
           ports:
-            - containerPort: 8000
+            - containerPort: 8002
           env:
             - name: product_ID
               value:  "a7c8d9e0-1b2f-4d3c-8e7a-6b5c4d3f2a1e"
             - name: JWT_SECRET
               value: "auth_ms_jwt_secret"
             - name: DB_HOST
-              value: "product-db.db.svc.cluster.local" # IN THE DIFFERENT NAMESPACE< SPECIFY THE NAMESPACE
+              value: "product-db.db-y.svc.cluster.local" # IN THE DIFFERENT NAMESPACE< SPECIFY THE NAMESPACE
             - name: DB_PORT
               value: "5432"
             - name: DATABASE_URL
@@ -42,6 +42,7 @@ spec:
     app: product-microservice
   ports:
     - protocol: TCP
-      port: 8000
-      targetPort: 8000
+      port: 8002
+      targetPort: 8002
+      nodePort: 30009
   type: NodePort

@@ -24,8 +24,10 @@ spec:
               value:  'a7c8d9e0-1b2f-4d3c-8e7a-6b5c4d3f2a1e'
             - name: JWT_SECRET
               value: "auth_ms_jwt_secret"
+            - name: ADMIN_JWT_SECRET
+              value: "auth_ms_jwt_secret"
             - name: DB_HOST
-              value: "authentication-db.db.svc.cluster.local" # IN THE DIFFERENT NAMESPACE< SPECIFY THE NAMESPACE
+              value: "authentication-db.db-y.svc.cluster.local" # IN THE DIFFERENT NAMESPACE< SPECIFY THE NAMESPACE
             - name: DB_PORT
               value: "5432"
             - name: DATABASE_URL
@@ -44,4 +46,5 @@ spec:
     - protocol: TCP
       port: 8000
       targetPort: 8000
+      nodePort: 30007
   type: NodePort

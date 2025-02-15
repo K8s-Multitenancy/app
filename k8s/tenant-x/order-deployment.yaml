@@ -18,14 +18,14 @@ spec:
         image: order-microservice:latest
         imagePullPolicy: Never
         ports:
-        - containerPort: 8000
+        - containerPort: 8001
         env:
         - name: TENANT_ID
           value:  "1e4f3b2a-8d7c-4a9b-bcde-1234567890ab"
         - name: JWT_SECRET
           value: "auth_ms_jwt_secret"
         - name: DB_HOST
-          value: "order-db.db.svc.cluster.local"
+          value: "order-db.db-x.svc.cluster.local"
         - name: DB_USER
           value: "postgres"
         - name: DB_PASSWORD
@@ -46,6 +46,7 @@ spec:
     app: order-microservice
   ports:
     - protocol: TCP
-      port: 8000
-      targetPort: 8000
-  type: ClusterIP
+      port: 8001
+      targetPort: 8001
+      nodePort: 30005
+  type: NodePort

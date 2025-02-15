@@ -18,14 +18,14 @@ spec:
           image: tenant-microservice:latest
           imagePullPolicy: Never  # Uses locally built image in Minikube
           ports:
-            - containerPort: 8000
+            - containerPort: 8003
           env:
             - name: TENANT_ID
               value:  "a7c8d9e0-1b2f-4d3c-8e7a-6b5c4d3f2a1e"
             - name: JWT_SECRET
               value: "auth_ms_jwt_secret"
             - name: DB_HOST
-              value: "tenant-db.db.svc.cluster.local" # IN THE DIFFERENT NAMESPACE< SPECIFY THE NAMESPACE
+              value: "tenant-db.db-y.svc.cluster.local" # IN THE DIFFERENT NAMESPACE< SPECIFY THE NAMESPACE
             - name: DB_PORT
               value: "5432"
             - name: DATABASE_URL
@@ -42,6 +42,7 @@ spec:
     app: tenant-microservice
   ports:
     - protocol: TCP
-      port: 8000
-      targetPort: 8000
+      port: 8003
+      targetPort: 8003
+      nodePort: 30008
   type: NodePort

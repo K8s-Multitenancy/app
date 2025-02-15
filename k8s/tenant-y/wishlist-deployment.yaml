@@ -18,14 +18,14 @@ spec:
         image: wishlist-microservice:latest
         imagePullPolicy: Never
         ports:
-        - containerPort: 8000
+        - containerPort: 8004
         env:
         - name: TENANT_ID
           value:  "a7c8d9e0-1b2f-4d3c-8e7a-6b5c4d3f2a1e"
         - name: JWT_SECRET
           value: "auth_ms_jwt_secret"
         - name: DB_HOST
-          value: "wishlist-db.db.svc.cluster.local"
+          value: "wishlist-db.db-y.svc.cluster.local"
         - name: DB_USER
           value: "postgres"
         - name: DB_PASSWORD
@@ -46,6 +46,7 @@ spec:
     app: wishlist-microservice
   ports:
     - protocol: TCP
-      port: 8000
-      targetPort: 8000
-  type: ClusterIP
+      port: 8004
+      targetPort: 8004
+      nodePort: 30011
+  type: NodePort
