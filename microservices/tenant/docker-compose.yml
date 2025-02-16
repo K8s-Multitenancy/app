@@ -5,7 +5,7 @@ services:
   microservice:
     build: .
     environment:
-      - AUTH_MS_URL=http://host.docker.internal:7999
+      - AUTH_MS_URL=http://host.docker.internal:8000
       - DB_HOST=db
       - DB_PORT=5432
     ports:

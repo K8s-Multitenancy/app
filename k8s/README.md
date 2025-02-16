@@ -102,19 +102,17 @@ Execute each of the `hns set` commands found in that `namespace.yaml` file
 kubectl hns set namespace-admin --parent=root-namespace
 kubectl hns set namespace-tenant-x --parent=root-namespace
 kubectl hns set namespace-tenant-y --parent=root-namespace
-kubectl hns set db-admin --parent=namespace-admin
-kubectl hns set db-x --parent=namespace-tenant-x
-kubectl hns set db-y --parent=namespace-tenant-y
+kubectl hns set db --parent=root-namespace
 kubectl hns set app-admin --parent=namespace-admin
 kubectl hns set app-x --parent=namespace-tenant-x
 kubectl hns set app-y --parent=namespace-tenant-y
 ```
-
+Apply the db folder and then do the next step. (IGNORE THE DB YAML IN TENANT-X AND TENANT-Y BECAUSE WE USE DB IN DB FOLDER)
 Go through each tenant folders, and apply ALL of the yaml files. (For example: admin)
 
 ```sh
 cd admin
-kubectl apply -f authentication-db.yaml -f authentication-deployment.yaml -f tenant-db.yaml -f tenant-deployment.yaml
+kubectl apply  -f authentication-deployment.yaml -f tenant-deployment.yaml
 ```
 
 Repeat this for **each YAML file** in the `k8s` directory.

@@ -15,25 +15,27 @@ spec:
     spec:
       containers:
       - name: wishlist-microservice
-        image: wishlist-microservice:latest
-        imagePullPolicy: Never
+        image: vinsensiusf/skripsi-wishlist-microservice
+        imagePullPolicy: Always
         ports:
-        - containerPort: 8000
+        - containerPort: 8004
         env:
-        - name: TENANT_ID
-          value:  "1e4f3b2a-8d7c-4a9b-bcde-1234567890ab"
-        - name: JWT_SECRET
-          value: "auth_ms_jwt_secret"
-        - name: DB_HOST
-          value: "wishlist-db.db-x.svc.cluster.local"
-        - name: DB_USER
-          value: "postgres"
-        - name: DB_PASSWORD
-          value: "postgres"
-        - name: DB_PORT
-          value: "5432"
-        - name: DATABASE_URL
-          value: "postgres://postgres:postgres@wishlist-db:5432/wishlist"
+          - name: TENANT_ID
+            value:  "08fa2bf2-4ec5-4293-9c0f-26159244896b"
+          - name: AUTH_MS_URL
+            value: "http://authentication-microservice.app-x.svc.cluster.local:8000" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
+          - name: JWT_SECRET
+            value: "auth_ms_jwt_secret"
+          - name: DB_HOST
+            value: "wishlist-db.db.svc.cluster.local" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
+          - name: DB_USER
+            value: "postgres"
+          - name: DB_PASSWORD
+            value: "postgres"
+          - name: DB_PORT
+            value: "5432"
+          - name: DATABASE_URL
+            value: "postgres://postgres:postgres@wishlist-db:5432/wishlist" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
 
 ---
 apiVersion: v1
@@ -46,6 +48,7 @@ spec:
     app: wishlist-microservice
   ports:
     - protocol: TCP
-      port: 8000
-      targetPort: 8000
+      port: 8004
+      targetPort: 8004
+      # nodePort: 30006
   type: ClusterIP
