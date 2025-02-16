@@ -21,7 +21,7 @@ spec:
         - containerPort: 8001
         env:
         - name: TENANT_ID
-          value:  "1e4f3b2a-8d7c-4a9b-bcde-1234567890ab"
+          value: "08fa2bf2-4ec5-4293-9c0f-26159244896b"
         - name: JWT_SECRET
           value: "auth_ms_jwt_secret"
         - name: AUTH_MS_URL
@@ -29,7 +29,7 @@ spec:
         - name: PRODUCT_MS_URL
           value: "http://product-microservice.app-x.svc.cluster.local:8002" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
         - name: DB_HOST
-          value: "order-db.db-x.svc.cluster.local" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
+          value: "order-db.db.svc.cluster.local" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
         - name: DB_USER
           value: "postgres"
         - name: DB_PASSWORD
@@ -52,5 +52,5 @@ spec:
     - protocol: TCP
       port: 8001
       targetPort: 8001
-      nodePort: 30005
-  type: NodePort
+      # nodePort: 30005
+  type: ClusterIP

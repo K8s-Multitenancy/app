@@ -21,19 +21,19 @@ spec:
             - containerPort: 8002
           env:
             - name: product_ID
-              value: "a7c8d9e0-1b2f-4d3c-8e7a-6b5c4d3f2a1e"
+              value: "8554fa4b-4c70-4011-b88a-c40b7f54d73d"
             - name: TENANT_ID
-              value: "a7c8d9e0-1b2f-4d3c-8e7a-6b5c4d3f2a1e"
+              value: "8554fa4b-4c70-4011-b88a-c40b7f54d73d"
             - name: ADMIN_TENANT_ID
-              value: "a7c8d9e0-1b2f-4d3c-8e7a-6b5c4d3f2a1e"
+              value: "00000000-0000-0000-0000-000000000000"
             - name: JWT_SECRET
               value: "auth_ms_jwt_secret"
             - name: AUTH_MS_URL
-              value: "http://authentication-microservice.app-y.svc.cluster.local:8000" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
+              value: "http://authentication-microservice.app-admin.svc.cluster.local:8000" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
             - name: TENANT_MS_URL
-              value: "http://tenant-microservice.app-y.svc.cluster.local:8003" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
+              value: "http://tenant-microservice.app-admin.svc.cluster.local:8003" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
             - name: DB_HOST
-              value: "product-db.db-y.svc.cluster.local" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
+              value: "product-db.db.svc.cluster.local" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
             - name: DB_PORT
               value: "5432"
             - name: DATABASE_URL
@@ -52,5 +52,5 @@ spec:
     - protocol: TCP
       port: 8002
       targetPort: 8002
-      nodePort: 30009
-  type: NodePort
+      # nodePort: 30009
+  type: ClusterIP

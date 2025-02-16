@@ -21,15 +21,13 @@ spec:
             - containerPort: 8003
           env:
             - name: TENANT_ID
-              value:  "a7c8d9e0-1b2f-4d3c-8e7a-6b5c4d3f2a1e"
-            - name: ADMIN_TENANT_ID
-              value:  "a7c8d9e0-1b2f-4d3c-8e7a-6b5c4d3f2a1e"
+              value: "8554fa4b-4c70-4011-b88a-c40b7f54d73d"
             - name: JWT_SECRET
               value: "auth_ms_jwt_secret"
             - name: AUTH_MS_URL
               value: "http://authentication-microservice.app-y.svc.cluster.local:8000" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
             - name: DB_HOST
-              value: "tenant-db.db-y.svc.cluster.local" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
+              value: "tenant-db.db.svc.cluster.local" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
             - name: DB_PORT
               value: "5432"
             - name: DATABASE_URL
@@ -48,5 +46,5 @@ spec:
     - protocol: TCP
       port: 8003
       targetPort: 8003
-      nodePort: 30008
-  type: NodePort
+      # nodePort: 30008
+  type: ClusterIP
