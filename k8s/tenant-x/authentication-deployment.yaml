@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: authentication-microservice
-  namespace: app-x
+  namespace: app-x 
 spec:
   replicas: 1
   selector:
@@ -15,33 +15,38 @@ spec:
     spec:
       containers:
         - name: authentication-microservice
-          image: authentication-microservice:latest
-          imagePullPolicy: Never  # Uses locally built image in Minikube
+          image: vinsensiusf/skripsi-authentication-microservice:latest
+          imagePullPolicy: Always  # Uses locally built image in Minikube
           ports:
             - containerPort: 8000
           env:
             - name: TENANT_ID
-              value:  "1e4f3b2a-8d7c-4a9b-bcde-1234567890ab"
+              value: "08fa2bf2-4ec5-4293-9c0f-26159244896b"
+            - name: ADMIN_TENANT_ID
+              value: "00000000-0000-0000-0000-000000000000"
             - name: JWT_SECRET
               value: "auth_ms_jwt_secret"
+            - name: ADMIN_JWT_SECRET
+              value: "auth_ms_jwt_secret"
             - name: DB_HOST
-              value: "authentication-db.db-x.svc.cluster.local" # IN THE DIFFERENT NAMESPACE< SPECIFY THE NAMESPACE
+              value: "authentication-db.db.svc.cluster.local" # IN THE DIFFERENT NAMESPACE< SPECIFY THE NAMESPACE
             - name: DB_PORT
               value: "5432"
             - name: DATABASE_URL
-              value: "postgres://postgres:postgres@authentication-db:5432/authentication"
+              value: "postgres://postgres:postgres@authentication-db:5432/authentication" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: authentication-microservice
-  namespace: app-x
+  namespace: app-x 
 spec:
   selector:
     app: authentication-microservice
+  type: ClusterIP
   ports:
     - protocol: TCP
       port: 8000
       targetPort: 8000
-  type: NodePort
+      # nodePort: 30002

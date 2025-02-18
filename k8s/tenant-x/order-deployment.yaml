@@ -15,17 +15,21 @@ spec:
     spec:
       containers:
       - name: order-microservice
-        image: order-microservice:latest
-        imagePullPolicy: Never
+        image: vinsensiusf/skripsi-orders-microservice:latest
+        imagePullPolicy: Always
         ports:
-        - containerPort: 8000
+        - containerPort: 8001
         env:
         - name: TENANT_ID
-          value:  "1e4f3b2a-8d7c-4a9b-bcde-1234567890ab"
+          value: "08fa2bf2-4ec5-4293-9c0f-26159244896b"
         - name: JWT_SECRET
           value: "auth_ms_jwt_secret"
+        - name: AUTH_MS_URL
+          value: "http://authentication-microservice.app-x.svc.cluster.local:8000" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
+        - name: PRODUCT_MS_URL
+          value: "http://product-microservice.app-x.svc.cluster.local:8002" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
         - name: DB_HOST
-          value: "order-db.db-x.svc.cluster.local"
+          value: "order-db.db.svc.cluster.local" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
         - name: DB_USER
           value: "postgres"
         - name: DB_PASSWORD
@@ -33,7 +37,7 @@ spec:
         - name: DB_PORT
           value: "5432"
         - name: DATABASE_URL
-          value: "postgres://postgres:postgres@order-db:5432/order"
+          value: "postgres://postgres:postgres@order-db:5432/order" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
 
 ---
 apiVersion: v1
@@ -46,6 +50,7 @@ spec:
     app: order-microservice
   ports:
     - protocol: TCP
-      port: 8000
-      targetPort: 8000
+      port: 8001
+      targetPort: 8001
+      # nodePort: 30005
   type: ClusterIP

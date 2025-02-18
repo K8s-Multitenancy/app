@@ -1,0 +1,161 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-admin
+  namespace: app-admin
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: admin-auth.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: authentication-microservice
+                port:
+                  number: 8000
+
+    - host: admin-tenant.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: tenant-microservice
+                port:
+                  number: 8003
+
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: app-admin-ingress
+#   namespace: app-admin
+#   annotations:
+#     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+#     nginx.ingress.kubernetes.io/use-regex: "true"
+#     nginx.ingress.kubernetes.io/rewrite-target: "/$2"
+# spec:
+#   ingressClassName: app-admin-ingress
+#   rules:
+#   - http:
+#       paths:
+#       - path: /auth(/+|)(.*)
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: authentication-microservice
+#             port:
+#               number: 8000
+#       - path: /tenant(/+|)(.*)
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: tenant-microservice
+#             port:
+#               number: 8003
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: namespace-x-ingress
+#   namespace: namespace-x
+#   annotations:
+#     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+#     nginx.ingress.kubernetes.io/use-regex: "true"
+#     nginx.ingress.kubernetes.io/rewrite-target: "/$2"
+# spec:
+#   ingressClassName: namespace-x-ingress
+#   rules:
+#   - http:
+#       paths:
+#       - path: /auth(/+|)(.*)
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: skripsi-auth-service
+#             port:
+#               number: 8000
+#       - path: /tenant(/+|)(.*)
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: skripsi-tenant-service
+#             port:
+#               number: 8003
+#       - path: /products(/+|)(.*)
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: skripsi-products-service
+#             port:
+#               number: 8002
+#       - path: /wishlist(/+|)(.*)
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: skripsi-wishlist-service
+#             port:
+#               number: 8004
+#       - path: /orders(/+|)(.*)
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: skripsi-orders-service
+#             port:
+#               number: 8001
+
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: namespace-y-ingress
+#   namespace: namespace-y
+#   annotations:
+#     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+#     nginx.ingress.kubernetes.io/use-regex: "true"
+#     nginx.ingress.kubernetes.io/rewrite-target: "/$2"
+# spec:
+#   ingressClassName: namespace-y-ingress
+#   rules:
+#   - http:
+#       paths:
+#       - path: /auth(/+|)(.*)
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: skripsi-auth-service
+#             port:
+#               number: 8000
+#       - path: /tenant(/+|)(.*)
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: skripsi-tenant-service
+#             port:
+#               number: 8003
+#       - path: /products(/+|)(.*)
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: skripsi-products-service
+#             port:
+#               number: 8002
+#       - path: /wishlist(/+|)(.*)
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: skripsi-wishlist-service
+#             port:
+#               number: 8004
+#       - path: /orders(/+|)(.*)
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: skripsi-orders-service
+#             port:
+#               number: 8001
