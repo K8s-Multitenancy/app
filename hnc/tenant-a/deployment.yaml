@@ -1,0 +1,358 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentication
+  namespace: tenant-a
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: authentication
+  template:
+    metadata:
+      labels:
+        app: authentication
+    spec:
+      containers:
+        - name: authentication
+          image:
+            valueFrom:
+              configMapKeyRef:
+                name: tenant-config
+                key: IMAGE_AUTHENTICATION
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+          env:
+            - name: TENANT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: tenant-config
+                  key: TENANT_ID
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: JWT_SECRET
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: AUTH_DB_HOST
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: AUTH_DB_NAME
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DEFAULT_DB_PORT
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: DB_PASSWORD
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tenant
+  namespace: tenant-a
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tenant
+  template:
+    metadata:
+      labels:
+        app: tenant
+    spec:
+      containers:
+        - name: tenant
+          image:
+            valueFrom:
+              configMapKeyRef:
+                name: tenant-config
+                key: IMAGE_TENANT
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8001
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+          env:
+            - name: TENANT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: tenant-config
+                  key: TENANT_ID
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: TENANT_DB_HOST
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: TENANT_DB_NAME
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DEFAULT_DB_PORT
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: DB_PASSWORD
+            - name: AUTH_MS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: tenant-config
+                  key: AUTHENTICATION_URL
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order
+  namespace: tenant-a
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+        - name: order
+          image:
+            valueFrom:
+              configMapKeyRef:
+                name: tenant-config
+                key: IMAGE_ORDER
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8002
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+          env:
+            - name: TENANT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: tenant-config
+                  key: TENANT_ID
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: ORDER_DB_HOST
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: ORDER_DB_NAME
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DEFAULT_DB_PORT
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: DB_PASSWORD
+            - name: AUTH_MS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: tenant-config
+                  key: AUTHENTICATION_URL
+             - name: PRODUCT_MS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: tenant-config
+                  key: PRODUCT_URL
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product
+  namespace: tenant-a
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: product
+  template:
+    metadata:
+      labels:
+        app: product
+    spec:
+      containers:
+        - name: product
+          image:
+            valueFrom:
+              configMapKeyRef:
+                name: tenant-config
+                key: IMAGE_PRODUCT
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8003
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+          env:
+            - name: TENANT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: tenant-config
+                  key: TENANT_ID
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: PRODUCT_DB_HOST
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: PRODUCT_DB_NAME
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DEFAULT_DB_PORT
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: DB_PASSWORD
+            - name: AUTH_MS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: tenant-config
+                  key: ADMIN_AUTHENTICATION_URL
+            - name: TENANT_MS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: tenant-config
+                  key: ADMIN_TENANT_URL
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wishlist
+  namespace: tenant-a
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: wishlist
+  template:
+    metadata:
+      labels:
+        app: wishlist
+    spec:
+      containers:
+        - name: wishlist
+          image:
+            valueFrom:
+              configMapKeyRef:
+                name: tenant-config
+                key: IMAGE_WISHLIST
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8004
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+          env:
+            - name: TENANT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: tenant-config
+                  key: TENANT_ID
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: WISHLIST_DB_HOST
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: WISHLIST_DB_NAME
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DEFAULT_DB_PORT
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: DB_PASSWORD
+            - name: AUTH_MS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: tenant-config
+                  key: AUTHENTICATION_URL
