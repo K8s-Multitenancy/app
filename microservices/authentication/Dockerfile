@@ -26,8 +26,8 @@ RUN pnpm run build
 FROM node:18.18.2-slim
 
 # Declaring env
-ENV PORT 8000
-ENV NODE_ENV production
+ENV PORT=8000
+ENV NODE_ENV=production
 
 # Set working directory
 WORKDIR /skripsi-auth
@@ -45,5 +45,4 @@ RUN npm install --only=production
 EXPOSE 8000
 
 # ✅ Run Drizzle Migrations at startup
-# CMD ["sh", "-c"]
-CMD ["node", "dist/src/server.js", "npm run generate", "npm run push"]
+CMD ["sh", "-c", "npm run generate && npm run push && node dist/src/server.js"]
