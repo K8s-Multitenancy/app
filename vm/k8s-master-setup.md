@@ -123,7 +123,8 @@ sudo sysctl --system
 1. **Initialize the control plane:**
 
 ```bash
-sudo kubeadm init --cri-socket /run/containerd/containerd.sock
+sudo kubeadm init --cri-socket /run/containerd/containerd.sock --pod-network-cidr=192.168.0.0/16
+
 ```
 
 2. **Set up `kubectl` for your user:**
@@ -284,8 +285,6 @@ Would you like me to help you diagnose any pod logs if you still encounter issue
 
 Choose a CNI (e.g., **Calico**):
 
-```bash
-kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
-```
+https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart
 
 ---

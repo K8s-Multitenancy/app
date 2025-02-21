@@ -2,11 +2,19 @@
 
 This guide provides step-by-step instructions to install or upgrade HNC (Hierarchical Namespace Controller) on your Kubernetes cluster. **Admin privileges** are required.
 
+## Preparation, Twiddle with the existing namespaces to exclude for HNS operations
+
+```
+kubectl label ns kube-system hnc.x-k8s.io/excluded-namespace=true --overwrite
+kubectl label ns kube-public hnc.x-k8s.io/excluded-namespace=true --overwrite
+kubectl label ns kube-node-lease hnc.x-k8s.io/excluded-namespace=true --overwrite
+```
+
 ## **1. Select HNC Version and Variant**
 
 ```bash
 # Select the latest version of HNC
-HNC_VERSION=v1.1.0
+HNC_VERSION=v1.0.0
 
 # Select the variant of HNC you like. Options include:
 # 'default': Standard version.
@@ -30,6 +38,18 @@ kubectl apply -f https://github.com/kubernetes-sigs/hierarchical-namespaces/rele
 ```bash
 kubectl get pods -n hnc-system
 ```
+
+```bash
+kubectl get svc -n hnc-system
+```
+
+- **Service and Endpoints:**  
+  Run:
+  ```bash
+  kubectl get svc hnc-webhook-service -n hnc-system -o yaml
+  kubectl get endpoints hnc-webhook-service -n hnc-system
+  ```
+  Confirm that the service is configured to expose port 443 and that its targetPort maps to 9443 (the port on which the webhook server is running in the pod). Also, verify that the endpoints are up and pointing to the correct pod IP and port.
 
 You should see the HNC controller pods running.
 
@@ -154,4 +174,66 @@ kubectl logs -n hnc-system -l app=hnc-controller-manager
 
 ---
 
-🎉 **Congratulations!** You have successfully installed and configured Hierarchical Namespace Controller (HNC) in your Kubernetes cluster!
+# **📌 Potential Issue.**
+
+## HNC-manager POD Crush
+
+## **Explanation of the Command:**
+
+```sh
+kubectl delete pod -n hnc-system -l control-plane=controller-manager
+```
+
+This command **deletes the HNC controller pod**, forcing Kubernetes to automatically recreate it.
+
+#### **Breaking Down the Command:**
+
+1️⃣ **`kubectl delete pod`** → Deletes a running pod.  
+2️⃣ **`-n hnc-system`** → Specifies the **namespace** (`hnc-system`) where the pod is running.  
+3️⃣ **`-l control-plane=controller-manager`** → Selects pods with the **label** `control-plane=controller-manager` (which identifies the HNC controller pod).
+
+### **Why Use This Command?**
+
+- Your **HNC pod is stuck in `CrashLoopBackOff`**, meaning it keeps failing and restarting.
+- Deleting the pod allows Kubernetes to **create a new one** automatically (because Deployments manage pods).
+- If the crash was due to a temporary issue, **the new pod may start successfully**.
+
+### **What Happens After Running This?**
+
+1️⃣ Kubernetes **immediately deletes the failing HNC pod**.  
+2️⃣ The **HNC Deployment notices the missing pod** and automatically starts a new one.  
+3️⃣ You can check the new pod with:
+
+```sh
+kubectl get pods -n hnc-system
+```
+
+Expected output:
+
+```
+NAME                                      READY   STATUS    RESTARTS   AGE
+hnc-controller-manager-XXXXX              1/1     Running   0          10s
+```
+
+4️⃣ If the new pod **still crashes**, **HNC is broken and needs to be reinstalled**.
+
+---
+
+### **✅ Next Steps**
+
+✔ Run:
+
+```sh
+kubectl get pods -n hnc-system
+```
+
+✔ If the pod **is still crashing**, reinstall HNC:
+
+```sh
+kubectl delete namespace hnc-system
+kubectl apply -f https://github.com/kubernetes-sigs/hierarchical-namespaces/releases/latest/download/hnc-manager.yaml
+```
+
+---
+
+Let me know if you need more explanation! 🚀

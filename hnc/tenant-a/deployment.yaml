@@ -4,7 +4,7 @@ metadata:
   name: authentication
   namespace: tenant-a
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: authentication
@@ -15,12 +15,8 @@ spec:
     spec:
       containers:
         - name: authentication
-          image:
-            valueFrom:
-              configMapKeyRef:
-                name: tenant-config
-                key: IMAGE_AUTHENTICATION
-          imagePullPolicy: Never
+          image: dpaalh/authentication:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
           resources:
@@ -74,7 +70,7 @@ metadata:
   name: tenant
   namespace: tenant-a
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: tenant
@@ -85,12 +81,8 @@ spec:
     spec:
       containers:
         - name: tenant
-          image:
-            valueFrom:
-              configMapKeyRef:
-                name: tenant-config
-                key: IMAGE_TENANT
-          imagePullPolicy: Never
+          image: dpaalh/tenant:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8001
           resources:
@@ -144,7 +136,7 @@ metadata:
   name: order
   namespace: tenant-a
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: order
@@ -155,12 +147,8 @@ spec:
     spec:
       containers:
         - name: order
-          image:
-            valueFrom:
-              configMapKeyRef:
-                name: tenant-config
-                key: IMAGE_ORDER
-          imagePullPolicy: Never
+          image: dpaalh/order:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8002
           resources:
@@ -206,7 +194,7 @@ spec:
                 configMapKeyRef:
                   name: tenant-config
                   key: AUTHENTICATION_URL
-             - name: PRODUCT_MS_URL
+            - name: PRODUCT_MS_URL
               valueFrom:
                 configMapKeyRef:
                   name: tenant-config
@@ -219,7 +207,7 @@ metadata:
   name: product
   namespace: tenant-a
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: product
@@ -230,12 +218,8 @@ spec:
     spec:
       containers:
         - name: product
-          image:
-            valueFrom:
-              configMapKeyRef:
-                name: tenant-config
-                key: IMAGE_PRODUCT
-          imagePullPolicy: Never
+          image: dpaalh/product:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8003
           resources:
@@ -294,7 +278,7 @@ metadata:
   name: wishlist
   namespace: tenant-a
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: wishlist
@@ -305,12 +289,8 @@ spec:
     spec:
       containers:
         - name: wishlist
-          image:
-            valueFrom:
-              configMapKeyRef:
-                name: tenant-config
-                key: IMAGE_WISHLIST
-          imagePullPolicy: Never
+          image: dpaalh/wishlist:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8004
           resources:

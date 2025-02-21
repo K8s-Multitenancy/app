@@ -4,7 +4,7 @@ metadata:
   name: authentication
   namespace: admin
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: authentication
@@ -15,12 +15,8 @@ spec:
     spec:
       containers:
         - name: authentication
-          image:
-            valueFrom:
-              configMapKeyRef:
-                name: tenant-config
-                key: IMAGE_AUTHENTICATION
-          imagePullPolicy: Never
+          image: dpaalh/authentication:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
           resources:
@@ -34,19 +30,19 @@ spec:
             - name: TENANT_ID
               valueFrom:
                 configMapKeyRef:
-                  name: tenant-config
+                  name: admin-config
                   key: TENANT_ID
             - name: ADMIN_TENANT_ID
               valueFrom:
                 configMapKeyRef:
-                  name: tenant-config
+                  name: admin-config
                   key: ADMIN_TENANT_ID
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: db-credentials
                   key: JWT_SECRET
-             - name: ADMIN_JWT_SECRET
+            - name: ADMIN_JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: db-credentials
@@ -84,7 +80,7 @@ metadata:
   name: tenant
   namespace: admin
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: tenant
@@ -95,12 +91,8 @@ spec:
     spec:
       containers:
         - name: tenant
-          image:
-            valueFrom:
-              configMapKeyRef:
-                name: tenant-config
-                key: IMAGE_TENANT
-          imagePullPolicy: Never
+          image: dpaalh/tenant:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8001
           resources:
@@ -114,13 +106,8 @@ spec:
             - name: TENANT_ID
               valueFrom:
                 configMapKeyRef:
-                  name: tenant-config
+                  name: admin-config
                   key: TENANT_ID
-            - name: AUTHENTICATION_URL
-                valueFrom:
-                configMapKeyRef:
-                  name: tenant-config
-                  key: AUTHENTICATION_URL
             - name: DB_HOST
               valueFrom:
                 configMapKeyRef:
@@ -146,3 +133,8 @@ spec:
                 secretKeyRef:
                   name: db-credentials
                   key: DB_PASSWORD
+            - name: AUTH_MS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: admin-config
+                  key: AUTHENTICATION_URL

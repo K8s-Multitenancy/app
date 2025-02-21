@@ -8,3 +8,4 @@ data:
   TENANT_DB_HOST: "34.101.215.47"
   AUTH_DB_NAME: "authentication-db"
   TENANT_DB_NAME: "tenant-db"
+  DEFAULT_DB_PORT: "5432"
