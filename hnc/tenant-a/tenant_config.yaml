@@ -6,7 +6,7 @@ metadata:
 data:
   TENANT_ID: "1e4f3b2a-8d7c-4a9b-bcde-1234567890aa"
   ADMIN_TENANT_ID: "00000000-0000-0000-0000-000000000000"
-  AUTHENTICATION_URL: "http://authentication:8080"
+  AUTHENTICATION_URL: "http://authentication:8000"
   PRODUCT_URL: "http://product:8003"
   ADMIN_AUTHENTICATION_URL: "http://authentication.admin.svc.cluster.local:8000"
   ADMIN_TENANT_URL: "http://tenant.admin.svc.cluster.local:8001"
