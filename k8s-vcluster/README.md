@@ -31,6 +31,7 @@ More info can be found here ([vCluster Docs](https://www.vcluster.com/docs/get-s
 ```sh
 kubectl apply -f namespace.yaml
 ```
+
 2. Create vCluster for each tenant
 - Admin
 ```sh
@@ -45,6 +46,11 @@ To connect to a vCluster, use
   vcluster connect <CLUSTERNAME> -n <NAMESPACE>
   # example: vcluster connect admin-cluster -n ns-admin
 ```
+To disconnect from inside of a vCluster, use
+```sh
+  vcluster disconnect
+```
+
 3. In each vCluster, apply the yaml files
 ```sh
   # connect to a vCluster if haven't already
