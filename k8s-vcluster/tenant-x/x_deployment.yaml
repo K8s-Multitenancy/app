@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: authentication
-  namespace: ns-x
 spec:
   replicas: 1
   selector:
@@ -73,7 +72,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tenant
-  namespace: ns-x
 spec:
   replicas: 1
   selector:
@@ -139,7 +137,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: order
-  namespace: ns-x
 spec:
   replicas: 1
   selector:
@@ -210,7 +207,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: product
-  namespace: ns-x
 spec:
   replicas: 1
   selector:
@@ -286,7 +282,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wishlist
-  namespace: ns-x
 spec:
   replicas: 1
   selector:
