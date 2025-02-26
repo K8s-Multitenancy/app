@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: authentication
-  namespace: ns-admin
 spec:
   replicas: 1
   selector:
@@ -78,7 +77,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tenant
-  namespace: ns-admin
 spec:
   replicas: 1
   selector:
