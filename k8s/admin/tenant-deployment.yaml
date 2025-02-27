@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tenant-microservice
-  namespace: app-admin
+  namespace: tenant-admin
 spec:
   replicas: 1
   selector:
@@ -27,7 +27,7 @@ spec:
             - name: JWT_SECRET
               value: "auth_ms_jwt_secret"
             - name: AUTH_MS_URL
-              value: "http://authentication-microservice.app-admin.svc.cluster.local:8000" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
+              value: "http://authentication-microservice.auth-admin.svc.cluster.local:8000" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
             - name: DB_HOST
               value: "tenant-db.db.svc.cluster.local" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
             - name: DB_PORT
@@ -40,7 +40,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: tenant-microservice
-  namespace:  app-admin
+  namespace:  tenant-admin
 spec:
   selector:
     app: tenant-microservice
