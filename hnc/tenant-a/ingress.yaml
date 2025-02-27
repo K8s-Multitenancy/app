@@ -1,0 +1,49 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tenant-a-ingress
+  namespace: tenant-a
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: "/$2"
+spec:
+  ingressClassName: tenant-a-ingress
+  rules:
+    - http:
+        paths:
+          - path: /auth(/+|)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: authentication
+                port:
+                  number: 8000
+          - path: /tenant(/+|)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: tenant
+                port:
+                  number: 8001
+          - path: /orders(/+|)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: order
+                port:
+                  number: 8002
+          - path: /products(/+|)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: product
+                port:
+                  number: 8003
+          - path: /wishlist(/+|)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: wishlist
+                port:
+                  number: 8004

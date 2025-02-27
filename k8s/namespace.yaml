@@ -36,17 +36,62 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: app-admin
+  name: auth-admin
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: app-x
+  name: tenant-admin
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: app-y
+  name: auth-x
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-x
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: product-x
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: order-x
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: wishlist-x
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: auth-y
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-y
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: product-y
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: order-y
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: wishlist-y
 ---
 
 ---
@@ -61,9 +106,21 @@ metadata:
 # kubectl hns set namespace-admin --parent=root-namespace
 # kubectl hns set namespace-tenant-x --parent=root-namespace
 # kubectl hns set namespace-tenant-y --parent=root-namespace
-# kubectl hns set app-admin --parent=namespace-admin
-# kubectl hns set app-x --parent=namespace-tenant-x
-# kubectl hns set app-y --parent=namespace-tenant-y
+# kubectl hns set auth-admin --parent=namespace-admin
+# kubectl hns set tenant-admin --parent=namespace-admin
+# kubectl hns set product-admin --parent=namespace-admin
+# kubectl hns set order-admin --parent=namespace-admin
+# kubectl hns set wishlist-admin --parent=namespace-admin
+# kubectl hns set auth-x --parent=namespace-admin
+# kubectl hns set tenant-x --parent=namespace-admin
+# kubectl hns set product-x --parent=namespace-admin
+# kubectl hns set order-x --parent=namespace-admin
+# kubectl hns set wishlist-x --parent=namespace-admin
+# kubectl hns set auth-y --parent=namespace-admin
+# kubectl hns set tenant-y --parent=namespace-admin
+# kubectl hns set product-y --parent=namespace-admin
+# kubectl hns set order-y --parent=namespace-admin
+# kubectl hns set wishlist-y --parent=namespace-admin
 # kubectl hns set db --parent=root-namespace
 
 

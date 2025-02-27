@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: product-microservice
-  namespace: app-x
+  namespace: product-x
 spec:
   replicas: 1
   selector:
@@ -29,9 +29,9 @@ spec:
             - name: JWT_SECRET
               value: "auth_ms_jwt_secret"
             - name: AUTH_MS_URL
-              value: "http://authentication-microservice.app-admin.svc.cluster.local:8000" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
+              value: "http://authentication-microservice.auth-admin.svc.cluster.local:8000" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
             - name: TENANT_MS_URL
-              value: "http://tenant-microservice.app-admin.svc.cluster.local:8003" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
+              value: "http://tenant-microservice.tenant-admin.svc.cluster.local:8003" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
             - name: DB_HOST
               value: "product-db.db.svc.cluster.local" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
             - name: DB_PORT
@@ -44,7 +44,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: product-microservice
-  namespace: app-x
+  namespace: product-x
 spec:
   selector:
     app: product-microservice

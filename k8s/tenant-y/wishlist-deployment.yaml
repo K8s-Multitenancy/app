@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wishlist-microservice
-  namespace: app-y
+  namespace: wishlist-y
 spec:
   replicas: 1
   selector:
@@ -23,7 +23,7 @@ spec:
           - name: TENANT_ID
             value:  "8554fa4b-4c70-4011-b88a-c40b7f54d73d"
           - name: AUTH_MS_URL
-            value: "http://authentication-microservice.app-y.svc.cluster.local:8000" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
+            value: "http://authentication-microservice.auth-y.svc.cluster.local:8000" #NEED TO BE CHANGE WHEN DEPLOYED TO CLOUD
           - name: JWT_SECRET
             value: "auth_ms_jwt_secret"
           - name: DB_HOST
@@ -42,7 +42,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: wishlist-microservice
-  namespace: app-y
+  namespace: wishlist-y
 spec:
   selector:
     app: wishlist-microservice
