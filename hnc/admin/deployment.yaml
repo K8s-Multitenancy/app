@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: authentication
-  namespace: admin
+  namespace: admin-authentication
 spec:
   replicas: 1
   selector:
@@ -78,7 +78,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tenant
-  namespace: admin
+  namespace: admin-tenant
 spec:
   replicas: 1
   selector:

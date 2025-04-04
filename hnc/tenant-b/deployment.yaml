@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: authentication
-  namespace: tenant-a-authentication
+  namespace: tenant-b-authentication
 spec:
   replicas: 1
   selector:
@@ -68,7 +68,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tenant
-  namespace: tenant-a-tenant
+  namespace: tenant-b-tenant
 spec:
   replicas: 1
   selector:
@@ -134,7 +134,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: order
-  namespace: tenant-a-order
+  namespace: tenant-b-order
 spec:
   replicas: 1
   selector:
@@ -205,7 +205,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: product
-  namespace: tenant-a-product
+  namespace: tenant-b-product
 spec:
   replicas: 1
   selector:
@@ -276,7 +276,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wishlist
-  namespace: tenant-a-wishlist
+  namespace: tenant-b-wishlist
 spec:
   replicas: 1
   selector:

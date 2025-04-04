@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: authentication
-  namespace: admin
+  namespace: admin-authentication
 spec:
   type: NodePort
   selector:
@@ -18,7 +18,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: tenant
-  namespace: admin
+  namespace: admin-tenant
 spec:
   type: NodePort
   selector:

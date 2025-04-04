@@ -1,0 +1,122 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: root
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-a
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-a-authentication
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-a-tenant
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-a-product
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-a-order
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-a-wishlist
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-b
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-b-authentication
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-b-tenant
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-b-product
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-b-order
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-b-wishlist
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: admin
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: admin-authentication
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: admin-tenant
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: grafana
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: prometheus
+---
+
+# Run the command below in terminal to set the parent namespaces
+# kubectl hns set tenant --parent=root
+# kubectl hns set tenant-a --parent=tenant
+# kubectl hns set tenant-a-authentication --parent=tenant-a
+# kubectl hns set tenant-a-tenant --parent=tenant-a
+# kubectl hns set tenant-a-product --parent=tenant-a
+# kubectl hns set tenant-a-order --parent=tenant-a
+# kubectl hns set tenant-a-wishlist --parent=tenant-a
+# kubectl hns set tenant-b --parent=tenant
+# kubectl hns set tenant-b-authentication --parent=tenant-b
+# kubectl hns set tenant-b-tenant --parent=tenant-b
+# kubectl hns set tenant-b-product --parent=tenant-b
+# kubectl hns set tenant-b-order --parent=tenant-b
+# kubectl hns set tenant-b-wishlist --parent=tenant-b
+# kubectl hns set admin --parent=root
+# kubectl hns set admin-authentication --parent=admin
+# kubectl hns set admin-tenant --parent=admin
+# kubectl hns set monitoring --parent=root
+# kubectl hns set prometheus --parent=monitoring
+# kubectl hns set grafana --parent=monitoring
