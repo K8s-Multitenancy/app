@@ -5,8 +5,8 @@ metadata:
   namespace: tenant-namespaces
 spec:
   hard:
-    limits.cpu: "6"
+    limits.cpu: "7"
     limits.memory: "30Gi"
-    requests.cpu: "6"
+    requests.cpu: "7"
     requests.memory: "30Gi"
     pods: "100"
