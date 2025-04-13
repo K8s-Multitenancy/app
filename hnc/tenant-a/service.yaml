@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: authentication
-  namespace: tenant-a
+  namespace: tenant-namespace-a
 spec:
   type: NodePort
   selector:
@@ -18,7 +18,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: tenant
-  namespace: tenant-a
+  namespace: tenant-namespace-a
 spec:
   type: NodePort
   selector:
@@ -34,7 +34,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: order
-  namespace: tenant-a
+  namespace: tenant-namespace-a
 spec:
   type: NodePort
   selector:
@@ -50,7 +50,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: product
-  namespace: tenant-a
+  namespace: tenant-namespace-a
 spec:
   type: NodePort
   selector:
@@ -66,7 +66,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: wishlist
-  namespace: tenant-a
+  namespace: tenant-namespace-a
 spec:
   type: NodePort
   selector:

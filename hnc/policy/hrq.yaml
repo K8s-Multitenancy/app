@@ -1,0 +1,12 @@
+apiVersion: hnc.x-k8s.io/v1alpha2
+kind: HierarchicalResourceQuota
+metadata:
+  name: hierarchy-rq
+  namespace: tenant-namespaces
+spec:
+  hard:
+    limits.cpu: "6"
+    limits.memory: "30Gi"
+    requests.cpu: "6"
+    requests.memory: "30Gi"
+    pods: "100"

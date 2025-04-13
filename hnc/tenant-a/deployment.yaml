@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: authentication
-  namespace: tenant-a
+  namespace: tenant-namespace-a
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: authentication
@@ -16,7 +16,7 @@ spec:
       containers:
         - name: authentication
           image: dpaalh/authentication:latest
-          imagePullPolicy: Always
+          imagePullPolicy: ifNotPresent
           ports:
             - containerPort: 8000
           resources:
@@ -68,9 +68,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tenant
-  namespace: tenant-a
+  namespace: tenant-namespace-a
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: tenant
@@ -82,7 +82,7 @@ spec:
       containers:
         - name: tenant
           image: dpaalh/tenant:latest
-          imagePullPolicy: Always
+          imagePullPolicy: ifNotPresent
           ports:
             - containerPort: 8001
           resources:
@@ -134,9 +134,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: order
-  namespace: tenant-a
+  namespace: tenant-namespace-a
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: order
@@ -205,9 +205,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: product
-  namespace: tenant-a
+  namespace: tenant-namespace-a
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: product
@@ -276,9 +276,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wishlist
-  namespace: tenant-a
+  namespace: tenant-namespace-a
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: wishlist

@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: db-config
-  namespace: admin
+  namespace: administration-namespace
 data:
   AUTH_DB_HOST: "34.101.215.47"
   TENANT_DB_HOST: "34.101.215.47"

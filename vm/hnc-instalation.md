@@ -69,17 +69,46 @@ kubectl krew update && kubectl krew install hns
 ### **Option 2: Manual Installation**
 
 ```bash
-# Ensure HNC_VERSION is set as above
-HNC_PLATFORM=linux_amd64 # Options: linux_arm64, darwin_amd64, darwin_arm64, windows_amd64
+#!/bin/bash
+# Select the latest version of HNC
+HNC_VERSION=v1.0.0
+PLATFORM=linux_amd64
 
-# Download the kubectl-hns binary
+# Install HNC. Afterwards, wait up to 30s for HNC to refresh the certificates on its webhooks.
+kubectl apply -f https://github.com/kubernetes-sigs/hierarchical-namespaces/releases/download/${HNC_VERSION}/default.yaml
+
+# Protect critical namespaces that Kubernetes needs
+
+kubectl label ns kube-system hnc.x-k8s.io/excluded-namespace=true --overwrite
+kubectl label ns kube-public hnc.x-k8s.io/excluded-namespace=true --overwrite
+kubectl label ns kube-node-lease hnc.x-k8s.io/excluded-namespace=true --overwrite
+
+# The the hierarchical namespace manifest from GitHub and apply it to the cluster
+# kubectl apply -f https://github.com/kubernetes-sigs/multi-tenancy/releases/download/hnc-$VERSION/hnc-manager.yaml
+
+# Install HNC. Afterwards, wait up to 30s for HNC to refresh the certificates on its webhooks.
+kubectl apply -f https://github.com/kubernetes-sigs/hierarchical-namespaces/releases/download/${HNC_VERSION}/default.yaml
+
+# Take some time out for things to adjust
+TIME_OUT=5
+echo "Taking a break for $TIME_OUT seconds while Kubernetes refreshes itself..."
+printf "Start time=$(date +'%s\n')"
+sleep $TIME_OUT
+printf "Start time=$(date +'%s\n')"
+
+HNC_PLATFORM=linux_amd64 # also supported: linux_arm64, darwin_amd64, darwin_arm64, windows_amd64
 curl -L https://github.com/kubernetes-sigs/hierarchical-namespaces/releases/download/${HNC_VERSION}/kubectl-hns_${HNC_PLATFORM} -o ./kubectl-hns
-
-# Make it executable
 chmod +x ./kubectl-hns
+# Install the plugin that allows kubectl to use the subcommand, his
+#curl -L https://github.com/kubernetes-sigs/multi-tenancy/releases/download/hnc-$VERSION/kubectl-hns_$PLATFORM -o ./kubectl-hns
 
-# Move it to a directory in your PATH
-sudo mv ./kubectl-hns /usr/local/bin/
+sudo mv kubectl-hns /bin
+sudo chmod +x  /bin/kubectl-hns
+
+# Execute the hns command. If all is well, you'll get the command line
+# help documentation
+
+kubectl hns
 ```
 
 ---
