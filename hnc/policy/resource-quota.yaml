@@ -5,10 +5,10 @@ metadata:
   namespace: tenant-namespace-a
 spec:
   hard:
-    limits.cpu: "1"
-    limits.memory: "2Gi" #"16Gi"
-    requests.cpu: "1"
-    requests.memory: "2Gi" #"8Gi"
+    limits.cpu: "3"
+    limits.memory: "16Gi"
+    requests.cpu: "3"
+    requests.memory: "16Gi"
     pods: "50"
 ---
 apiVersion: v1
@@ -18,8 +18,8 @@ metadata:
   namespace: tenant-namespace-b
 spec:
   hard:
-    limits.cpu: "1"
-    limits.memory: "2Gi" #"16Gi"
-    requests.cpu: "1"
-    requests.memory: "2Gi" #"8Gi"
+    limits.cpu: "3"
+    limits.memory: "16Gi"
+    requests.cpu: "3"
+    requests.memory: "16Gi"
     pods: "50"
