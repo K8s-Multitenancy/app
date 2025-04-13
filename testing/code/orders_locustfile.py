@@ -1,8 +1,8 @@
 import random
 from uuid import uuid4
 from locust import HttpUser, LoadTestShape, SequentialTaskSet, constant, task
-from testing.config import AUTH_MS_BASE_URL, ORDERS_MS_BASE_URL, PRODUCTS_MS_BASE_URL
-from testing.utils import formatCSVShapeData
+from config import AUTH_MS_BASE_URL, ORDERS_MS_BASE_URL, PRODUCTS_MS_BASE_URL
+from utils.formatCSVShapeData import formatCSVShapeData
 
 class TestScenario(SequentialTaskSet):
     @task
@@ -20,7 +20,7 @@ class TestScenario(SequentialTaskSet):
         }
         register_response = self.client.post(f"{AUTH_MS_BASE_URL}/user/register", json=register_payload)
         register_data = register_response.json()
-        self.user_id = register_data["id"]  # TODO: CHANGE THE "id" KEY TO PROPER KEY FROM RESPONSE IF ERROR
+        self.user_id = register_data[0]["id"]  # TODO: CHANGE THE "id" KEY TO PROPER KEY FROM RESPONSE IF ERROR
 
         # Login
         login_payload = {
