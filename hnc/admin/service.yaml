@@ -5,7 +5,7 @@ metadata:
   namespace: administration-namespace
 spec:
   type: NodePort
-  selector:w
+  selector:
     app: authentication
   ports:
     - protocol: TCP
@@ -27,4 +27,4 @@ spec:
     - protocol: TCP
       port: 8001
       targetPort: 8001
-      nodePort: 30080
+      nodePort: 30081

@@ -5,8 +5,36 @@ metadata:
   namespace: tenant-namespaces
 spec:
   hard:
-    limits.cpu: "7"
-    limits.memory: "30Gi"
-    requests.cpu: "7"
-    requests.memory: "30Gi"
+    limits.cpu: "8"
+    limits.memory: "32Gi"
+    requests.cpu: "8"
+    requests.memory: "32Gi"
     pods: "100"
+
+---
+apiVersion: hnc.x-k8s.io/v1alpha2
+kind: HierarchicalResourceQuota
+metadata:
+  name: hierarchy-rq
+  namespace: tenant-namespace-a
+spec:
+  hard:
+    limits.cpu: "4"
+    limits.memory: "16Gi"
+    requests.cpu: "4"
+    requests.memory: "16Gi"
+    pods: "50"
+
+---
+apiVersion: hnc.x-k8s.io/v1alpha2
+kind: HierarchicalResourceQuota
+metadata:
+  name: hierarchy-rq
+  namespace: tenant-namespace-b
+spec:
+  hard:
+    limits.cpu: "4"
+    limits.memory: "16Gi"
+    requests.cpu: "4"
+    requests.memory: "16Gi"
+    pods: "50"

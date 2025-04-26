@@ -16,7 +16,7 @@ spec:
       containers:
         - name: authentication
           image: dpaalh/authentication:latest
-          imagePullPolicy: ifNotPresent
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
           resources:
@@ -82,7 +82,7 @@ spec:
       containers:
         - name: tenant
           image: dpaalh/tenant:latest
-          imagePullPolicy: ifNotPresent
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8001
           resources:
