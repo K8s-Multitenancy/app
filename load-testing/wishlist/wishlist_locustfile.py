@@ -129,7 +129,8 @@ class WishlistMicroserviceUser(HttpUser):
 
 class PoissonShapeWishlist(LoadTestShape):
     stages = formatCSVShapeData(
-        'shape/poisson_max_500.csv',
+        # 'shape/poisson_max_500.csv',
+        'shape/output.csv',
         WishlistMicroserviceUser
     )
     def tick(self):
