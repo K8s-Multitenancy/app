@@ -5,14 +5,27 @@ import express from "express";
 import cors from "cors";
 import express_prom_bundle from "express-prom-bundle";
 
-import userRoutes from './user/user.routes';
+import userRoutes from "./user/user.routes";
+
+import http from "http";
+import https from "https";
+
+http.globalAgent = new http.Agent({
+  keepAlive: true,
+});
+
+https.globalAgent = new https.Agent({
+  keepAlive: true,
+});
+console.log("HTTP ", http.globalAgent);
+console.log("HTTPS ", https.globalAgent);
 
 const metricsMiddleware = express_prom_bundle({
   includeMethod: true,
   includePath: true,
   includeStatusCode: true,
-  includeUp: true
-})
+  includeUp: true,
+});
 
 const app = express();
 app.use(metricsMiddleware);
