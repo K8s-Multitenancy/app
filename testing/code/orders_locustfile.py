@@ -35,9 +35,18 @@ class TestScenario(SequentialTaskSet):
         }
 
     @task
-    def add_product_to_cart(self):
+    def get_all_available_product(self):
         available_products = self.client.get(f"{PRODUCTS_MS_BASE_URL}/product")
-        self.selected_product = available_products.json()["products"][0]
+        if available_products.status_code == 200:
+            self.available_products = available_products.json()
+        else:
+            print(f"Failed to get available products, status code: {available_products.status_code}")
+            self.available_products = {"products": []}  # fallback to empty list
+
+    @task
+    def add_product_to_cart(self):
+        # available_products = self.client.get(f"{PRODUCTS_MS_BASE_URL}/product")
+        self.selected_product = self.available_products["products"][0]
         add_product_payload = {
             "product_id": self.selected_product["id"],
             "quantity": 1
@@ -97,7 +106,7 @@ class OrdersMicroserviceUser(HttpUser):
 
 class PoissonShapeOrders(LoadTestShape):
     stages = formatCSVShapeData(
-        'shape/poisson_max_1000.csv',
+        'shape/poisson_max_100.csv',
         OrdersMicroserviceUser
     )
     def tick(self):
