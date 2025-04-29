@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: authentication
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: authentication
@@ -15,7 +15,7 @@ spec:
       containers:
         - name: authentication
           image: dpaalh/authentication:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
           resources:
@@ -78,7 +78,7 @@ kind: Deployment
 metadata:
   name: tenant
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: tenant
@@ -90,7 +90,7 @@ spec:
       containers:
         - name: tenant
           image: dpaalh/tenant:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8001
           resources:

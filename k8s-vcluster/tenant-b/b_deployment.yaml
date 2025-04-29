@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: authentication
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: authentication
@@ -15,7 +15,7 @@ spec:
       containers:
         - name: authentication
           image: dpaalh/authentication:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
           resources:
@@ -73,7 +73,7 @@ kind: Deployment
 metadata:
   name: tenant
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: tenant
@@ -85,7 +85,7 @@ spec:
       containers:
         - name: tenant
           image: dpaalh/tenant:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8001
           resources:
@@ -138,7 +138,7 @@ kind: Deployment
 metadata:
   name: order
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: order
@@ -150,7 +150,7 @@ spec:
       containers:
         - name: order
           image: dpaalh/order:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8002
           resources:
@@ -208,7 +208,7 @@ kind: Deployment
 metadata:
   name: product
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: product
@@ -220,7 +220,7 @@ spec:
       containers:
         - name: product
           image: dpaalh/product:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8003
           resources:
@@ -283,7 +283,7 @@ kind: Deployment
 metadata:
   name: wishlist
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: wishlist
@@ -295,7 +295,7 @@ spec:
       containers:
         - name: wishlist
           image: dpaalh/wishlist:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8004
           resources:

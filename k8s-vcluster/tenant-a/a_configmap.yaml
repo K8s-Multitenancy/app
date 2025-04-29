@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: tenant-config
 data:
-  TENANT_ID: "db67e63a-4df3-48d5-9d26-d33d73e294c2"
+  TENANT_ID: "db4cde0b-33fd-4eaa-b6ee-6a54a3aa40c4"
   ADMIN_TENANT_ID: "00000000-0000-0000-0000-000000000000"
   AUTHENTICATION_URL: "http://authentication:8000"
   PRODUCT_URL: "http://product:8003"
