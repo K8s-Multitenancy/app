@@ -5,6 +5,8 @@ controlPlane:
         enabled: false
     scheduling:
       podManagementPolicy: OrderedReady
+  serviceMonitor:
+    enabled: true
 
 # policies:
 #   resourceQuota:
