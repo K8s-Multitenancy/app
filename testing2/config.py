@@ -1,0 +1,14 @@
+TENANT_AUTH_MS_BASE_URL = "http://34.101.228.183:30080"
+AUTH_MS_BASE_URL = "http://34.101.74.255:32080"
+ORDERS_MS_BASE_URL = "http://34.101.74.255:32082"
+PRODUCTS_MS_BASE_URL = "http://34.101.74.255:32083"
+TENANT_MS_BASE_URL = "http://34.101.74.255:32081"
+WISHLIST_MS_BASE_URL = "http://34.101.74.255:32084"
+
+
+# TENANT_AUTH_MS_BASE_URL = "http://localhost:8000"
+# AUTH_MS_BASE_URL = "http://localhost:8000"
+# ORDERS_MS_BASE_URL = "http://localhost:8001"
+# PRODUCTS_MS_BASE_URL = "http://localhost:8002"
+# TENANT_MS_BASE_URL = "http://localhost:8003"
+# WISHLIST_MS_BASE_URL = "http://localhost:8004"
