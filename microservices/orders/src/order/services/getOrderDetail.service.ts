@@ -21,10 +21,12 @@ export const getOrderDetailService = async (
             return new InternalServerErrorResponse("Order ID is not defined").generate();
         }
 
+        console.time()
         const orderDetail = await getOrderDetail(SERVER_TENANT_ID, order_id);
         if (!orderDetail) {
             return new NotFoundResponse("Order detail not found").generate();
         }
+        console.timeEnd()
 
         const order = await getOrderById(SERVER_TENANT_ID, user.id, orderDetail?.order_id);
         if (!order) {

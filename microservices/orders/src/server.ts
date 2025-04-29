@@ -15,6 +15,19 @@ const metricsMiddleware = express_prom_bundle({
   includeUp: true,
 });
 
+import http from 'http';
+import https from 'https';
+
+http.globalAgent = new http.Agent({
+  keepAlive: true
+});
+
+https.globalAgent = new https.Agent({
+  keepAlive: true
+});
+console.log("HTTP ",http.globalAgent)
+console.log("HTTPS ",https.globalAgent)
+
 const app = express();
 app.use(metricsMiddleware);
 app.use(cors());
@@ -28,6 +41,7 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 8001;
+// const PORT = 8001;
 app.listen(PORT, () => {
   console.log(`🚀 Orders Microservice has started on port ${PORT}`);
 });

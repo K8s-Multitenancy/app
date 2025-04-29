@@ -26,7 +26,7 @@ RUN pnpm run build
 FROM node:18.18.2-slim
 
 # Declaring env
-ENV PORT=8002
+ENV PORT=8001
 ENV NODE_ENV=production
 
 # Set working directory
@@ -42,7 +42,7 @@ COPY --from=builder /skripsi-orders/db/schema ./db/schema
 RUN npm install --only=production
 
 # Expose server port
-EXPOSE 8002
+EXPOSE 8001
 
 # Start the application
 CMD ["sh", "-c", "npm run generate && npm run push && node dist/src/server.js"]

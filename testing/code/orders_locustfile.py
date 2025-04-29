@@ -5,7 +5,11 @@ from config import AUTH_MS_BASE_URL, ORDERS_MS_BASE_URL, PRODUCTS_MS_BASE_URL
 from utils.formatCSVShapeData import formatCSVShapeData
 
 class TestScenario(SequentialTaskSet):
-    @task
+    def on_start(self):
+        """Executed once at the start, not recorded in report."""
+        self.preparation()
+
+    # @task
     def preparation(self):
         username = f"user-{str(uuid4())}"
 
@@ -31,7 +35,7 @@ class TestScenario(SequentialTaskSet):
         login_data = login_response.json()
 
         self.headers = {
-            "Authorization": f"Bearer {login_data["token"]}"
+            "Authorization": f"Bearer {login_data['token']}"
         }
 
     @task
@@ -83,7 +87,7 @@ class TestScenario(SequentialTaskSet):
 
     @task
     def get_my_order_detail(self):
-        response = self.client.get(f"{ORDERS_MS_BASE_URL}/order/{self.order_data["id"]}", headers=self.headers)
+        response = self.client.get(f"{ORDERS_MS_BASE_URL}/order/{self.order_data['id']}", headers=self.headers)
         if response.status_code != 200:
             raise Exception("Error in getting my order's detail")
         self.my_order_detail = response.json()
@@ -95,18 +99,18 @@ class TestScenario(SequentialTaskSet):
             "payment_reference": str(uuid4()),
             "amount": self.order_data['total_amount']
         }
-        response = self.client.post(f'{ORDERS_MS_BASE_URL}/order/{self.order_data["id"]}/pay', json=payload, headers=self.headers)
+        response = self.client.post(f"{ORDERS_MS_BASE_URL}/order/{self.order_data['id']}/pay", json=payload, headers=self.headers)
         if response.status_code != 200:
             raise Exception("Error in paying my order")
 
 class OrdersMicroserviceUser(HttpUser):
     host = ORDERS_MS_BASE_URL
     tasks = [TestScenario]
-    wait_time = constant(0.5)
+    wait_time = constant(1)
 
 class PoissonShapeOrders(LoadTestShape):
     stages = formatCSVShapeData(
-        'shape/poisson_max_100.csv',
+        'shape/poisson_max_1000.csv',
         OrdersMicroserviceUser
     )
     def tick(self):
