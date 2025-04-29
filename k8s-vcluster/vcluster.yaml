@@ -1,0 +1,15 @@
+controlPlane:
+  statefulSet:
+    persistence:
+      volumeClaim:
+        enabled: false
+    scheduling:
+      podManagementPolicy: OrderedReady
+
+# policies:
+#   resourceQuota:
+#     enabled: true
+#     quota:
+#       cpu: "10"
+#       memory: 20Gi
+#       pods: "10"

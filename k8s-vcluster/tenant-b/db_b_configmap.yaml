@@ -5,6 +5,12 @@ metadata:
 data:
   AUTH_DB_HOST: "34.50.81.194"
   TENANT_DB_HOST: "34.50.75.55"
+  PRODUCT_DB_HOST: "34.128.64.48"
+  ORDER_DB_HOST: "34.50.69.126"
+  WISHLIST_DB_HOST: "34.101.182.151"
   AUTH_DB_NAME: "authentication-db"
   TENANT_DB_NAME: "tenant-db"
+  PRODUCT_DB_NAME: "product-db"
+  ORDER_DB_NAME: "order-db"
+  WISHLIST_DB_NAME: "wishlist-db"
   DEFAULT_DB_PORT: "5432"

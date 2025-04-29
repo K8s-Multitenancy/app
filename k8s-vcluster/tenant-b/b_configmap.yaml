@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tenant-config
+data:
+  TENANT_ID: "db67e63a-4df3-48d5-9d26-d33d73e294c2"
+  ADMIN_TENANT_ID: "00000000-0000-0000-0000-000000000000"
+  AUTHENTICATION_URL: "http://authentication:8000"
+  PRODUCT_URL: "http://product:8003"
+  # ADMIN_AUTHENTICATION_URL: "http://authentication.ns-admin.svc.cluster.local:8000"
+  # ADMIN_TENANT_URL: "http://tenant.ns-admin.svc.cluster.local:8001"
+  ADMIN_AUTHENTICATION_URL: "http://34.101.239.0:30080"
+  ADMIN_TENANT_URL: "http://34.101.239.0:30081"
