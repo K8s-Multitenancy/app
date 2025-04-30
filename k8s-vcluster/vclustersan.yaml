@@ -1,0 +1,10 @@
+controlPlane:
+  statefulSet:
+    persistence:
+      volumeClaim:
+        enabled: false
+    scheduling:
+      podManagementPolicy: OrderedReady
+  proxy:
+    extraSANs:
+    - 34.101.239.0

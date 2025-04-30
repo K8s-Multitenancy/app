@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: administration-namespace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-namespace-a
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-namespace-b

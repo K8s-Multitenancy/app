@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+data:
+  AUTH_DB_HOST: "34.128.97.178"
+  TENANT_DB_HOST: "34.34.220.227"
+  PRODUCT_DB_HOST: "34.101.223.168"
+  ORDER_DB_HOST: "34.101.45.243"
+  WISHLIST_DB_HOST: "34.101.182.151"
+  AUTH_DB_NAME: "authentication-db"
+  TENANT_DB_NAME: "tenant-db"
+  PRODUCT_DB_NAME: "product-db"
+  ORDER_DB_NAME: "order-db"
+  WISHLIST_DB_NAME: "wishlist-db"
+  DEFAULT_DB_PORT: "5432"
