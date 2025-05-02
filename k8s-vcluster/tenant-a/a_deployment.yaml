@@ -22,10 +22,10 @@ spec:
             requests:
               memory: "64Mi"
               cpu: "100m"
-              ephemeral-storage: "256Mi"
+              ephemeral-storage: "64Mi"
             limits:
               memory: "512Mi"
-              cpu: "250m"
+              cpu: "150m"
           env:
             - name: TENANT_ID
               valueFrom:
@@ -93,10 +93,10 @@ spec:
             requests:
               memory: "64Mi"
               cpu: "100m"
-              ephemeral-storage: "256Mi"
+              ephemeral-storage: "64Mi"
             limits:
               memory: "512Mi"
-              cpu: "250m"
+              cpu: "150m"
           env:
             - name: TENANT_ID
               valueFrom:
@@ -159,10 +159,10 @@ spec:
             requests:
               memory: "64Mi"
               cpu: "100m"
-              ephemeral-storage: "256Mi"
+              ephemeral-storage: "64Mi"
             limits:
               memory: "512Mi"
-              cpu: "250m"
+              cpu: "150m"
           env:
             - name: TENANT_ID
               valueFrom:
@@ -230,10 +230,10 @@ spec:
             requests:
               memory: "64Mi"
               cpu: "100m"
-              ephemeral-storage: "256Mi"
+              ephemeral-storage: "64Mi"
             limits:
               memory: "512Mi"
-              cpu: "250m"
+              cpu: "150m"
           env:
             - name: TENANT_ID
               valueFrom:
@@ -306,10 +306,10 @@ spec:
             requests:
               memory: "64Mi"
               cpu: "100m"
-              ephemeral-storage: "256Mi"
+              ephemeral-storage: "64Mi"
             limits:
               memory: "512Mi"
-              cpu: "250m"
+              cpu: "150m"
           env:
             - name: TENANT_ID
               valueFrom:

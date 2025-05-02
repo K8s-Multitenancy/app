@@ -25,7 +25,7 @@ spec:
               cpu: "100m"
             limits:
               memory: "512Mi"
-              cpu: "250m"
+              cpu: "150m"
           env:
             - name: TENANT_ID
               valueFrom:
@@ -101,7 +101,7 @@ spec:
               cpu: "100m"
             limits:
               memory: "512Mi"
-              cpu: "250m"
+              cpu: "150m"
           env:
             - name: TENANT_ID
               valueFrom:
