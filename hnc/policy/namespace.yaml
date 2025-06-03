@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: admin-namespaces
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-namespaces
+---
+apiVersion: hnc.x-k8s.io/v1alpha2
+kind: SubnamespaceAnchor
+metadata:
+  name: monitoring-namespace
+  namespace: admin-namespaces
+---
+apiVersion: hnc.x-k8s.io/v1alpha2
+kind: SubnamespaceAnchor
+metadata:
+  name: administration-namespace
+  namespace: admin-namespaces
+---
+apiVersion: hnc.x-k8s.io/v1alpha2
+kind: SubnamespaceAnchor
+metadata:
+  name: tenant-namespace-a
+  namespace: tenant-namespaces
+---
+apiVersion: hnc.x-k8s.io/v1alpha2
+kind: SubnamespaceAnchor
+metadata:
+  name: tenant-namespace-b
+  namespace: tenant-namespaces

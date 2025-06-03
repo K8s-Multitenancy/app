@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+  namespace: administration-namespace
+data:
+  AUTH_DB_HOST: "34.128.97.178"
+  TENANT_DB_HOST: "34.34.220.227"
+  AUTH_DB_NAME: "authentication-db"
+  TENANT_DB_NAME: "tenant-db"
+  DEFAULT_DB_PORT: "5432"

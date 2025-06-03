@@ -1,0 +1,9 @@
+controlPlane:
+  statefulSet:
+    persistence:
+      volumeClaim:
+        enabled: false
+    scheduling:
+      podManagementPolicy: OrderedReady
+  serviceMonitor:
+    enabled: true

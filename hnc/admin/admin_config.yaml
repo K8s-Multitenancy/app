@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: admin-config
+  namespace: administration-namespace
+data:
+  TENANT_ID: "00000000-0000-0000-0000-000000000000"
+  ADMIN_TENANT_ID: "00000000-0000-0000-0000-000000000000"
+  AUTHENTICATION_URL: "http://authentication:8000"
