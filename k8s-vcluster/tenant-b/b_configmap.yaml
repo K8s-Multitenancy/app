@@ -9,5 +9,5 @@ data:
   PRODUCT_URL: "http://product:8003"
   # ADMIN_AUTHENTICATION_URL: "http://authentication.ns-admin.svc.cluster.local:8000"
   # ADMIN_TENANT_URL: "http://tenant.ns-admin.svc.cluster.local:8001"
-  ADMIN_AUTHENTICATION_URL: "http://34.101.239.0:30080"
-  ADMIN_TENANT_URL: "http://34.101.239.0:30081"
+  ADMIN_AUTHENTICATION_URL: "http://34.101.219.174:30080"
+  ADMIN_TENANT_URL: "http://34.101.219.174:30081"

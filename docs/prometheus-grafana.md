@@ -1,10 +1,3 @@
-Tentu! Ini aku rapikan jadi format dokumentasi `.md` yang rapi, jelas, dan cocok buat langsung dipakai:  
-Aku juga perbaiki flow dan konsistensi markdown-nya supaya enak dibaca.
-
-Berikut hasilnya:
-
----
-
 # 📈 Installing Prometheus Operator on Kubernetes Using Helm
 
 This guide provides a step-by-step tutorial on how to install the **Prometheus Operator** (via `kube-prometheus-stack`) on a Kubernetes cluster using Helm.

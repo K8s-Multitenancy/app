@@ -186,14 +186,14 @@ The ‘swapfile’ entry should be commented out, as shown below
 Create a file named k8s.conf in /etc/modules-load.d and add the following kernel modules to be loaded at startup
 
 ```
- sudo vim /etc/modules-load.d/k8s.conf
+sudo vim /etc/modules-load.d/k8s.conf
 ```
 
 Add below content, save and close the file
 
 ```
- overlay
- br_netfilter
+overlay
+br_netfilter
 ```
 
 Load above modules to the current session
@@ -206,7 +206,7 @@ sudo modprobe br_netfilter
 Check the status
 
 ```
- lsmod | grep "overlay\|br_netfilter"
+lsmod | grep "overlay\|br_netfilter"
 ```
 
 Output should be shown as below
@@ -218,28 +218,28 @@ Output should be shown as below
 Create k8s.conf file in /etc/sysctl.d
 
 ```
- sudo vim /etc/sysctl.d/k8s.conf
+sudo vim /etc/sysctl.d/k8s.conf
 ```
 
 Add below content, save and close the file
 
 ```
- net.bridge.bridge-nf-call-ip6tables = 1
- net.bridge.bridge-nf-call-iptables = 1
- net.ipv4.ip_forward = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
 ```
 
 Apply newly added network params
 
 ```
- sudo sysctl --system
+sudo sysctl --system
 ```
 
 ### Install necessary software tools to continue / CP-W
 
 ```
- sudo apt-get install -y apt-transport-https ca-certificates curl \
-  gpg gnupg2 software-properties-common
+sudo apt-get install -y apt-transport-https ca-certificates curl \
+gpg gnupg2 software-properties-common
 ```
 
 **Now, both nodes are ready to install Kubernetes tools and the runtime**
@@ -261,23 +261,23 @@ sudo mkdir -m 755 /etc/apt/keyrings
 ### Download and add the k8s repository key / CP-W
 
 ```
- curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | \
-  sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | \
+sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 ```
 
 ### Add Kubernetes repository in the source list / CP-W
 
 ```
- echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | \
-  sudo tee /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | \
+sudo tee /etc/apt/sources.list.d/kubernetes.list
 ```
 
 ### Update the package manager and install Kubernetes tools / CP-W
 
 ```
- sudo apt update
- sudo apt-get install -y kubelet kubeadm kubectl
- sudo apt-mark hold kubelet kubeadm kubectl
+sudo apt update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
 At this point, we have installed all the necessary Kubernetes tools. Kubernetes services such as API server and kube-scheduler are running as containers. Also, pods we deploy run as containers. Therefore, we need a platform to manage these containers. Although Docker is the most popular container runtime, Kubernetes has recently switched to containerd as the default runtime. While Docker or CRI-O can still be configured as the runtime, this tutorial will focus on the containerd runtime
@@ -293,12 +293,12 @@ If you are starting over with this tutorial, verify whether the overlay and br_n
 ### Add containerd repository key and add the repository to source list / CP-W
 
 ```
- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
-  sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 ```
 
 ```
- sudo chmod a+r /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
 ```
 
 ```

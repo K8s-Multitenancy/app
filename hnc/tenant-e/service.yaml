@@ -1,69 +1,77 @@
----
 apiVersion: v1
 kind: Service
 metadata:
-  name: skripsi-auth-service
+  name: authentication
+  namespace: tenant-namespace-e
 spec:
   type: NodePort
   selector:
-    app: skripsi-auth
+    app: authentication
   ports:
     - protocol: TCP
       port: 8000
       targetPort: 8000
+      nodePort: 33080
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: skripsi-tenant-service
+  name: tenant
+  namespace: tenant-namespace-e
 spec:
   type: NodePort
   selector:
-    app: skripsi-tenant
-  ports:
-    - protocol: TCP
-      port: 8003
-      targetPort: 8003
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: skripsi-products-service
-spec:
-  type: NodePort
-  selector:
-    app: skripsi-products
-  ports:
-    - protocol: TCP
-      port: 8002
-      targetPort: 8002
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: skripsi-wishlist-service
-spec:
-  type: NodePort
-  selector:
-    app: skripsi-wishlist
-  ports:
-    - protocol: TCP
-      port: 8004
-      targetPort: 8004
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: skripsi-orders-service
-spec:
-  type: NodePort
-  selector:
-    app: skripsi-orders
+    app: tenant
   ports:
     - protocol: TCP
       port: 8001
       targetPort: 8001
+      nodePort: 33081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order
+  namespace: tenant-namespace-e
+spec:
+  type: NodePort
+  selector:
+    app: order
+  ports:
+    - protocol: TCP
+      port: 8002
+      targetPort: 8002
+      nodePort: 33082
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product
+  namespace: tenant-namespace-e
+spec:
+  type: NodePort
+  selector:
+    app: product
+  ports:
+    - protocol: TCP
+      port: 8003
+      targetPort: 8003
+      nodePort: 33083
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wishlist
+  namespace: tenant-namespace-e
+spec:
+  type: NodePort
+  selector:
+    app: wishlist
+  ports:
+    - protocol: TCP
+      port: 8004
+      targetPort: 8004
+      nodePort: 33084
